@@ -11,17 +11,15 @@ export default async function Page({ params: { slug } }) {
     const blocks = await getBlocks(page.id);
     return (
         <main className="layout">
-            <section className="flex gap-x-6 py-10">
-                <article className="">
+            <section className="flex gap-x-4 py-10 ">
+                <article className=" w-full lg:max-w-4xl">
                     <h1 className="md:text-4xl text-2xl font-bold py-2">
                         {page.icon !== null ? (
                             <Emoji symbol={page.icon.emoji} />
                         ) : null}
                         {page.properties.Name.title[0].text.content}
                     </h1>
-                    <div className="flex pb-2">
-                        <LikeButton slug={slug} />
-                    </div>
+
                     <div className="relative w-full h-80">
                         {page.cover !== null ? (
                             <Image
@@ -38,14 +36,19 @@ export default async function Page({ params: { slug } }) {
                             />
                         ) : null}
                     </div>
-                    {blocks &&
-                        blocks.map((block) => (
-                            <React.Fragment key={block.id}>
-                                {renderBlock(block)}
-                            </React.Fragment>
-                        ))}
+                    <div className="py-10">
+                        {blocks &&
+                            blocks.map((block) => (
+                                <React.Fragment key={block.id}>
+                                    {renderBlock(block)}
+                                </React.Fragment>
+                            ))}
+                        <div className="flex pb-2">
+                            <LikeButton slug={slug} />
+                        </div>
+                    </div>
                 </article>
-                <aside className="py-4">
+                <aside className="py-4 hidden lg:block px-4 shrink-0 grow">
                     <div className="sticky top-10">
                         <TableOfContents />
                     </div>
