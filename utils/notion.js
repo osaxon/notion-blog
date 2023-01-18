@@ -1,8 +1,8 @@
 import { cache } from "react";
 import { client } from "@/lib/notionClient";
-import uniq from 'lodash/uniq';
+import uniq from "lodash/uniq";
 
-const DB = process.env.NOTION_DATABASE
+const DB = process.env.NOTION_DATABASE;
 
 export const getPosts = cache(async (startCursor = undefined) => {
   const {
@@ -26,15 +26,15 @@ export const getFeaturedPosts = cache(async () => {
 });
 
 export const getPostsByTag = cache(async (tag) => {
-  console.log(tag)
+  console.log(tag);
   const { results: posts } = await client.databases.query({
     database_id: `${process.env.NOTION_DATABASE}`,
     filter: {
-          property: "Tags",
-          multi_select: {
-            contains: tag,
-          },
-        },
+      property: "Tags",
+      multi_select: {
+        contains: tag,
+      },
+    },
   });
   return { posts };
 });
@@ -53,41 +53,44 @@ export const getSinglePost = cache(async (id) => {
 });
 
 export const getBySlug = async (slug) => {
-    const { results: posts } = await client.databases.query({
-      database_id: DB,
-      filter: {
-        property: "Slug",
-        formula: {
-          string: {
-            equals: slug
-          }
-        }
-      }
-    })
-    return posts[0]
-}
+  const { results: pages } = await client.databases.query({
+    database_id: DB,
+    filter: {
+      property: "Slug",
+      formula: {
+        string: {
+          equals: slug,
+        },
+      },
+    },
+  });
+  console.log(pages[0]);
+  return pages[0];
+};
 
-export const getBlocks = cache(async (id) => {
+export const getBlocks = async (id) => {
   const { results: blocks } = await client.blocks.children.list({
     block_id: id,
   });
   return blocks;
-});
+};
 
 export const likePage = async (currentLikes, id) => {
   const response = await client.pages.update({
     page_id: id,
     properties: {
       Likes: {
-        Number: currentLikes + 1
-      }
-    }
-  })
-  console.log(response)
-}
+        Number: currentLikes + 1,
+      },
+    },
+  });
+  console.log(response);
+};
 
 export const getTags = (posts) => {
   const tags = [];
-  posts.forEach(({properties}) => properties.Tags.multi_select.forEach(({name}) => tags.push(name)))
-  return uniq(tags)
-}
+  posts.forEach(({ properties }) =>
+    properties.Tags.multi_select.forEach(({ name }) => tags.push(name))
+  );
+  return uniq(tags);
+};
