@@ -1,9 +1,14 @@
 import { prisma } from "@/lib/prisma";
 import { getSessionId } from "@/lib/helper.server";
+import { createHmac } from "node:crypto";
 
 export default async function handler(req, res) {
   const { slug } = req.query;
   const sessionId = getSessionId(req);
+
+  const secret = process.env.API_SECRET;
+  console.log(req.headers);
+
   try {
     const response = await prisma.contentMeta.upsert({
       where: {

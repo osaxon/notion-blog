@@ -29,8 +29,6 @@ export default function useContentMeta(slug) {
     },
   });
 
-  console.log(mutatedData);
-
   return {
     likes: data?.likes,
     views: data?.views,

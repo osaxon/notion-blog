@@ -26,7 +26,6 @@ export const getFeaturedPosts = cache(async () => {
 });
 
 export const getPostsByTag = cache(async (tag) => {
-  console.log(tag);
   const { results: posts } = await client.databases.query({
     database_id: `${process.env.NOTION_DATABASE}`,
     filter: {

@@ -6,14 +6,10 @@ import { useEffect } from "react";
 const LikeButton = ({ slug }) => {
   const { likes, addLike } = useContentMeta(slug);
 
-  useEffect(() => {
-    console.log(likes);
-  }, [likes]);
-
   return (
     <div className="flex items-center space-x-4">
-      <button onClick={addLike}>
-        <FiHeart size={36} />
+      <button className="overflow-hidden" onClick={addLike}>
+        <FiHeart className="bg-transparent fill-black" size={36} />
       </button>
       {likes}
     </div>
