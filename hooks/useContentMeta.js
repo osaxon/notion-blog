@@ -11,20 +11,29 @@ export default function useContentMeta(slug) {
       const response = await apiClient.get(`content/${slug}`);
       return response.data;
     },
+    staleTime: 5 * 60 * 1000,
   });
 
-  const addLike = useMutation({
+  const { data: mutatedData, mutate: addLike } = useMutation({
     mutationFn: () => apiClient.post(`/like/${slug}`),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["content_meta", slug] });
+    onMutate: async () => {
+      await queryClient.cancelQueries({ queryKey: ["content_meta", slug] });
+      const previousMeta = queryClient.getQueryData(["content_meta", slug]);
+      if (previousMeta) {
+        queryClient.setQueryData(["content_meta", slug], {
+          ...previousMeta,
+          likes: previousMeta.likes + 1,
+        });
+      }
+      return { previousMeta };
     },
   });
 
-  console.log(data);
+  console.log(mutatedData);
 
   return {
     likes: data?.likes,
     views: data?.views,
-    addLike: addLike.mutate,
+    addLike,
   };
 }
