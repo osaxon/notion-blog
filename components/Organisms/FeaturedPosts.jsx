@@ -1,52 +1,75 @@
 import Image from "next/image";
-import React from "react";
 import Link from "next/link";
-import Emoji from "../Atoms/Emoji";
 import {
-  getFeaturedPosts,
-  getPostsByTag,
-  getTags,
-  likePage,
+    getFeaturedPosts,
+    getPostsByTag,
+    getTags,
+    likePage,
 } from "@/utils/notion";
-import { getPostCoverImage } from "@/lib/helpers";
+import { getPostCoverImage, getPostTitle, getPostSlug } from "@/lib/helpers";
 import { ScreenSizes, ContainerSizes } from "../Atoms/TailwindContainerSizes";
 
 export default async function FeaturedPosts() {
-  const { posts } = await getFeaturedPosts();
-  return (
-    <section className="flex flex-col gap-2 items-start w-screen mb-6">
-      <h2 className="text-2xl font-bold">Featured Posts</h2>
-      <ul className="carousel gap-2 ">
-        {posts &&
-          posts.map((post) => (
-            <li className="carousel-item" key={post.id}>
-              <Link href={`/${post.properties.Slug.formula.string}`}>
-                <div className="relative">
-                  <Image
-                    src={getPostCoverImage(post)}
-                    alt="cover image"
-                    width={400}
-                    height={300}
-                    className="object-cover -z-50"
-                  />
-                  <p className="md:text-2xl text-xl absolute bottom-0 px-2 bg-zinc-400 bg-opacity-50 text-zinc-50 font-bold">
-                    {post.properties.Name.title[0].plain_text}
-                  </p>
-                </div>
-              </Link>
-              <Link href={`/`}></Link>
-              {/* <button onClick={(1, post.id)}>
-                <Emoji symbol={"❤️"} />
-              </button> */}
-            </li>
-          ))}
-      </ul>
-      <Link
-        className="font-bold text-xl text-zinc-50 bg-zinc-900 py-1 px-2 hover:bg-zinc-800 transition-all mt-2"
-        href="/posts"
-      >
-        View More
-      </Link>
-    </section>
-  );
+    const { posts } = await getFeaturedPosts();
+
+    function nextSlide(current) {
+        const total = posts.length;
+        if (current < posts.length) {
+            return current + 1;
+        } else if (current == posts.length) {
+            return 1;
+        }
+    }
+
+    function previousSlide(current) {
+        const total = posts.length;
+        if (current > 1) {
+            return current - 1;
+        } else if (current == 1) {
+            return posts.length;
+        }
+    }
+
+    console.log(posts[0].properties.Slug);
+
+    return (
+        <ul className="w-full carousel">
+            {posts &&
+                posts.map((post, index) => (
+                    <li
+                        className="relative carousel-item w-full min-h-full h-[calc(100vh*0.7)]"
+                        key={post.id}
+                        id={`slide${index + 1}`}
+                    >
+                        <Image
+                            src={getPostCoverImage(post)}
+                            fill
+                            alt="cover image"
+                            className="absolute -z-50 object-cover"
+                        />
+                        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                            <a
+                                href={`#slide${previousSlide(index + 1)}`}
+                                className="btn btn-circle"
+                            >
+                                ❮
+                            </a>
+                            <a
+                                href={`#slide${nextSlide(index + 1)}`}
+                                className="btn btn-circle"
+                            >
+                                ❯
+                            </a>
+                        </div>
+                        <div className="flex items-end">
+                            <Link href={`/${getPostSlug(post)}`}>
+                                <h2 className="text-3xl text-zinc-50 px-4 bg-zinc-600 bg-opacity-50">
+                                    {getPostTitle(post)}
+                                </h2>
+                            </Link>
+                        </div>
+                    </li>
+                ))}
+        </ul>
+    );
 }
