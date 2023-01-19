@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import useScrollSpy from "@/hooks/useScrollSpy";
+import clsx from "clsx";
 
 function useHeadings() {
     const [headings, setHeadings] = useState([]);
@@ -26,16 +27,17 @@ const TableOfContents = () => {
     );
 
     return (
-        <nav className="overflow-auto pb-4">
+        <nav>
             <ul className="mt-4 flex flex-col space-y-2">
                 {headings.map((heading) => (
                     <li key={heading.id}>
                         <a
-                            style={{
-                                marginLeft: `${heading.level - 2}em`,
-                                fontWeight:
-                                    activeId === heading.id ? "bold" : "normal",
-                            }}
+                            className={clsx(
+                                "font-medium text-xl",
+                                activeId === heading.id
+                                    ? "font-bold"
+                                    : "font-normal"
+                            )}
                             href={`#${heading.id}`}
                         >
                             {heading.text}

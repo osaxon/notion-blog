@@ -4,16 +4,16 @@ import useContentMeta from "@/hooks/useContentMeta";
 import { useEffect } from "react";
 
 const LikeButton = ({ slug }) => {
-  const { likes, addLike } = useContentMeta(slug);
+    const { likes, addLike } = useContentMeta(slug);
 
-  return (
-    <div className="flex items-center space-x-4">
-      <button className="overflow-hidden" onClick={addLike}>
-        <FiHeart className="bg-transparent fill-black" size={36} />
-      </button>
-      {likes}
-    </div>
-  );
+    return (
+        <div className="flex items-center space-x-4">
+            <button className="overflow-hidden" onClick={addLike}>
+                <FiHeart className="bg-transparent fill-black" size={36} />
+            </button>
+            <span className="font-mono">{likes}</span>
+        </div>
+    );
 };
 
 export default LikeButton;

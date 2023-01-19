@@ -4,15 +4,15 @@ import Image from "next/image";
 import Emoji from "@/components/Atoms/Emoji";
 import { renderBlock } from "@/lib/helpers";
 import { getBySlug, getBlocks } from "@/utils/notion";
-import TableOfContents from "@/components/Organisms/TableOfContents";
+import SideBar from "@/components/Organisms/SideBar";
 
 export default async function Page({ params: { slug } }) {
     const page = await getBySlug(slug);
     const blocks = await getBlocks(page.id);
     return (
         <main className="layout">
-            <section className="flex gap-x-4 py-10 ">
-                <article className=" w-full lg:max-w-4xl">
+            <section className="flex gap-x-4 py-10 w-full ">
+                <article>
                     <h1 className="md:text-4xl text-2xl font-bold py-2">
                         {page.icon !== null ? (
                             <Emoji symbol={page.icon.emoji} />
@@ -43,16 +43,9 @@ export default async function Page({ params: { slug } }) {
                                     {renderBlock(block)}
                                 </React.Fragment>
                             ))}
-                        <div className="flex pb-2">
-                            <LikeButton slug={slug} />
-                        </div>
                     </div>
                 </article>
-                <aside className="py-4 hidden lg:block px-4 shrink-0 grow">
-                    <div className="sticky top-10">
-                        <TableOfContents />
-                    </div>
-                </aside>
+                <SideBar />
             </section>
         </main>
     );
