@@ -39,7 +39,7 @@ export const getFeaturedPosts = cache(async () => {
     return { posts };
 });
 
-export const getPostsByTag = cache(async (tag = undefined) => {
+export const getPostsByTag = cache(async (tag) => {
     const { results: posts } = await client.databases.query({
         database_id: POSTS_DB,
         filter: {
@@ -52,7 +52,7 @@ export const getPostsByTag = cache(async (tag = undefined) => {
     return { posts };
 });
 
-export const getSinglePost = cache(async (id = undefined) => {
+export const getSinglePost = cache(async (id) => {
     let post;
     try {
         post = await client.pages.retrieve({
@@ -65,7 +65,7 @@ export const getSinglePost = cache(async (id = undefined) => {
     return post;
 });
 
-export const getBySlug = async (slug = undefined) => {
+export const getBySlug = async (slug) => {
     const { results: pages } = await client.databases.query({
         database_id: POSTS_DB,
         filter: {
@@ -77,11 +77,10 @@ export const getBySlug = async (slug = undefined) => {
             },
         },
     });
-    console.log(pages[0]);
     return pages[0];
 };
 
-export const getBlocks = async (id = undefined) => {
+export const getBlocks = async (id) => {
     const { results: blocks } = await client.blocks.children.list({
         block_id: id,
     });
