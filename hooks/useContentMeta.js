@@ -8,7 +8,7 @@ export default function useContentMeta(slug) {
     const { data, status } = useQuery({
         queryKey: ["content_meta", slug],
         queryFn: async () => {
-            const response = await apiClient.get(`content/${slug}`);
+            const response = await apiClient.get(`api/content/${slug}`);
             return response.data;
         },
         staleTime: 5 * 60 * 1000,
@@ -20,7 +20,7 @@ export default function useContentMeta(slug) {
         status: mutateStatus,
     } = useMutation({
         // update the like count in the DB
-        mutationFn: async () => await apiClient.post(`/like/${slug}`),
+        mutationFn: async () => await apiClient.post(`api/like/${slug}`),
         // optimistally update the state
         onMutate: async () => {
             // cancel any outgoing queries for fresh data
