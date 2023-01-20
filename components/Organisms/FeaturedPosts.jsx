@@ -30,46 +30,50 @@ export default async function FeaturedPosts() {
         }
     }
 
-    console.log(posts[0].properties.Slug);
-
     return (
-        <ul className="w-full carousel">
-            {posts &&
-                posts.map((post, index) => (
-                    <li
-                        className="relative carousel-item w-full min-h-full h-[calc(100vh*0.7)]"
-                        key={post.id}
-                        id={`slide${index + 1}`}
-                    >
-                        <Image
-                            src={getPostCoverImage(post)}
-                            fill
-                            alt="cover image"
-                            className="absolute -z-50 object-cover"
-                        />
-                        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                            <a
-                                href={`#slide${previousSlide(index + 1)}`}
-                                className="btn btn-circle"
+        <section className="h-[70vh] w-full relative">
+            <div className="absolute inset-0">
+                <ul className="w-full carousel min-h-full">
+                    {posts &&
+                        posts.map((post, index) => (
+                            <li
+                                className="relative carousel-item w-full min-h-full"
+                                key={post.id}
+                                id={`slide${index + 1}`}
                             >
-                                ❮
-                            </a>
-                            <a
-                                href={`#slide${nextSlide(index + 1)}`}
-                                className="btn btn-circle"
-                            >
-                                ❯
-                            </a>
-                        </div>
-                        <div className="flex items-end">
-                            <Link href={`/${getPostSlug(post)}`}>
-                                <h2 className="text-3xl text-zinc-50 px-4 bg-zinc-600 bg-opacity-50">
-                                    {getPostTitle(post)}
-                                </h2>
-                            </Link>
-                        </div>
-                    </li>
-                ))}
-        </ul>
+                                <Image
+                                    src={getPostCoverImage(post)}
+                                    fill
+                                    alt="cover image"
+                                    className="absolute -z-50 object-cover"
+                                />
+                                <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                                    <a
+                                        href={`#slide${previousSlide(
+                                            index + 1
+                                        )}`}
+                                        className="btn btn-circle btn-primary"
+                                    >
+                                        ❮
+                                    </a>
+                                    <a
+                                        href={`#slide${nextSlide(index + 1)}`}
+                                        className="btn btn-circle btn-primary"
+                                    >
+                                        ❯
+                                    </a>
+                                </div>
+                                <div className="flex items-end">
+                                    <Link href={`/${getPostSlug(post)}`}>
+                                        <h2 className="text-3xl text-zinc-50 px-4 bg-zinc-600 bg-opacity-50">
+                                            {getPostTitle(post)}
+                                        </h2>
+                                    </Link>
+                                </div>
+                            </li>
+                        ))}
+                </ul>
+            </div>
+        </section>
     );
 }

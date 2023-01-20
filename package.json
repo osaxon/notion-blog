@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.7",
+    "@heroicons/react": "^2.0.13",
     "@next/font": "13.1.2",
     "@notionhq/client": "^2.2.3",
     "@prisma/client": "^4.8.1",
@@ -28,7 +30,8 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
     "server-only": "^0.0.1",
-    "slugify": "^1.6.5"
+    "slugify": "^1.6.5",
+    "zustand": "^4.3.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
