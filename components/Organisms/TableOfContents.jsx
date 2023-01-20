@@ -28,7 +28,7 @@ const TableOfContents = () => {
 
     return (
         <nav>
-            <ul className="mt-4 flex flex-col space-y-2">
+            <ul className="flex flex-col space-y-2">
                 {headings.map((heading) => (
                     <li key={heading.id}>
                         <a

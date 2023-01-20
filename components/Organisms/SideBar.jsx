@@ -9,8 +9,8 @@ const SideBar = () => {
     const slug = usePathname().split("/")[1];
 
     return (
-        <aside className="hidden ml-4 md:block basis-44 lg:basis-60 shrink-0">
-            <div className="w-full sticky top-20 justify-evenly h-[450px] flex flex-col ">
+        <aside className="hidden ml-4 mt-12 sm:block basis-40 md:basis-44 lg:basis-60 shrink-0">
+            <div className="w-full sticky top-20 justify-start gap-y-10 h-[450px] flex flex-col">
                 <TableOfContents />
                 <LikeButton slug={slug} />
                 <BuyMeACoffee />

@@ -1,22 +1,41 @@
 "use client";
+import Emoji from "@/components/Atoms/Emoji";
 import { FiHeart } from "react-icons/fi";
 import useContentMeta from "@/hooks/useContentMeta";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 
 const LikeButton = ({ slug }) => {
     const { likes, addLike, mutateStatus, userLikes } = useContentMeta(slug);
+    const [animate, setAnimate] = useState(false);
+
+    function handleClick() {
+        addLike();
+        if (userLikes >= 4) {
+            setAnimate(true);
+            setTimeout(() => {
+                setAnimate(false);
+            }, 2500);
+        }
+    }
 
     return (
-        <div className="flex items-end space-x-2">
+        <div className="flex relative items-end space-x-2">
+            <Emoji
+                className={clsx(
+                    "animate-bounce z-50 text-xl absolute left-4 bottom-6",
+                    animate ? "block" : "hidden"
+                )}
+                symbol="😻"
+            />
             <button
                 disabled={userLikes >= 5}
-                onClick={addLike}
-                className="bg-accent clip-path-heart scale-150 translate-x-2"
+                onClick={() => handleClick()}
+                className="bg-accent group hover:bg-accent-focus clip-path-heart scale-150 translate-x-2"
             >
                 <div
                     className={clsx(
-                        "bg-primary w-8 h-8 bg-top transition-transform duration-200",
+                        "bg-primary w-8 group-hover:bg-primary-focus h-8 bg-top transition-transform duration-200",
                         userLikes === 0
                             ? "translate-y-8"
                             : userLikes === 1
@@ -29,11 +48,13 @@ const LikeButton = ({ slug }) => {
                             ? "translate-y-1"
                             : userLikes === 5
                             ? "translate-y-0"
+                            : mutateStatus === "loading"
+                            ? "animate-pulse"
                             : ""
                     )}
-                ></div>
+                />
             </button>
-            <span className="font-mono opacity-40 text-base-content">
+            <span className="font-mono select-none opacity-40 text-base-content">
                 {likes}
             </span>
         </div>

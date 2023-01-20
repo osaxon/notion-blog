@@ -12,8 +12,8 @@ export default async function Page({ params: { slug } }) {
     return (
         <main className="layout">
             <section className="flex gap-x-4 py-10 w-full ">
-                <article>
-                    <h1 className="md:text-4xl text-2xl font-bold py-2">
+                <article className="flex flex-col gap-2">
+                    <h1 className="md:text-4xl text-2xl font-bold">
                         {page.icon !== null ? (
                             <Emoji symbol={page.icon.emoji} />
                         ) : null}
@@ -36,7 +36,7 @@ export default async function Page({ params: { slug } }) {
                             />
                         ) : null}
                     </div>
-                    <div className="py-10">
+                    <div className="text-justify flex flex-col gap-2">
                         {blocks &&
                             blocks.map((block) => (
                                 <React.Fragment key={block.id}>
