@@ -6,7 +6,12 @@ import {
     getTags,
     likePage,
 } from "@/utils/notion";
-import { getPostCoverImage, getPostTitle, getPostSlug } from "@/lib/helpers";
+import {
+    getPostCoverImage,
+    getPostTitle,
+    getPostSlug,
+    getPostExcerpt,
+} from "@/lib/helpers";
 import { ScreenSizes, ContainerSizes } from "../Atoms/TailwindContainerSizes";
 
 export default async function FeaturedPosts() {
@@ -47,28 +52,35 @@ export default async function FeaturedPosts() {
                                     alt="cover image"
                                     className="absolute -z-50 object-cover"
                                 />
-                                <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                                <div className="absolute layout flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                                     <a
                                         href={`#slide${previousSlide(
                                             index + 1
                                         )}`}
-                                        className="btn btn-circle btn-primary"
+                                        className="btn btn-circle text-base-content bg-secondary-content border-0 bg-opacity-50"
                                     >
                                         ❮
                                     </a>
                                     <a
                                         href={`#slide${nextSlide(index + 1)}`}
-                                        className="btn btn-circle btn-primary"
+                                        className="btn btn-circle text-base-content bg-secondary-content border-0 bg-opacity-50"
                                     >
                                         ❯
                                     </a>
                                 </div>
-                                <div className="flex items-end">
-                                    <Link href={`/${getPostSlug(post)}`}>
-                                        <h2 className="text-3xl text-zinc-50 px-4 bg-zinc-600 bg-opacity-50">
-                                            {getPostTitle(post)}
-                                        </h2>
-                                    </Link>
+                                <div className="flex items-end w-full">
+                                    <div className="w-full bg-secondary-content backdrop-blur-sm bg-opacity-40">
+                                        <Link href={`/${getPostSlug(post)}`}>
+                                            <div className="text-base-content  layout">
+                                                <h2 className="text-3xl font-bold">
+                                                    {getPostTitle(post)}
+                                                </h2>
+                                                <p className="text-2xl">
+                                                    {getPostExcerpt(post)}
+                                                </p>
+                                            </div>
+                                        </Link>
+                                    </div>
                                 </div>
                             </li>
                         ))}

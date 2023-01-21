@@ -1,11 +1,11 @@
 import React, { Suspense } from "react";
-
 import PostSkeleton from "@/components/Organisms/PostSkeleton";
 import { Post } from "@/components/Organisms";
 import SideBar from "@/components/Organisms/SideBar";
 
 import { getPosts } from "@/utils/notion";
 import { getPostSlug } from "@/lib/helpers";
+import ReadTime from "@/components/Molecules/ReadTime";
 
 export default async function Page({ params: { slug } }) {
     return (

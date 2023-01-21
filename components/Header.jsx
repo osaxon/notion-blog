@@ -11,6 +11,10 @@ import MobileMenu from "./Molecules/MobileMenu";
 
 const navLinks = [
     {
+        title: "Home",
+        href: "/",
+    },
+    {
         title: "All Posts",
         href: "/",
     },
@@ -62,9 +66,10 @@ export default function Header() {
         >
             <header
                 className={clsx(
-                    "relative h-16 mx-auto transition-colors bg-transparent border-b border-transparent duration-200 group-hover:bg-white group-hover:border-gray-200",
+                    "relative h-16 mx-auto transition-colors bg-transparent border-b border-transparent duration-200 group-hover:bg-secondary-content group-hover:border-gray-200",
                     {
-                        "!bg-white !border-gray-200": !isHome || isScrolled,
+                        "!bg-secondary-content !border-gray-200":
+                            !isHome || isScrolled,
                     }
                 )}
             >
@@ -99,7 +104,7 @@ export default function Header() {
                         </ul>
                     </div>
                 </nav>
-                <nav className="flex items-center -mr-2 h-full sm:hidden">
+                <nav className="flex items-center layout h-full sm:hidden">
                     <MobileMenu links={navLinks} />
                 </nav>
             </header>

@@ -1,5 +1,6 @@
 import { PageCover, BlockContent } from "../Molecules";
 import { getBySlug, getBlocks, getPosts } from "@/utils/notion";
+import ReadTime from "../Molecules/ReadTime";
 
 export default async function Post({ slug }) {
     const page = await getBySlug(slug);
