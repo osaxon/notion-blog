@@ -35,7 +35,7 @@ const TableOfContents = () => {
                             className={clsx(
                                 "font-medium text-primary-content text-xl",
                                 activeId === heading.id
-                                    ? "font-bold text-primary-focus"
+                                    ? "font-bold md:text-primary-focus sm:text-primary-content"
                                     : "font-normal"
                             )}
                             href={`#${heading.id}`}

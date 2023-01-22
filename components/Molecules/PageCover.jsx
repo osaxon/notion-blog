@@ -25,7 +25,7 @@ const PageCover = ({ page }) => {
                 </div>
             </header>
 
-            <div className="relative w-full h-80">
+            <div className="relative w-full h-80 md:h-96">
                 {page?.cover !== null ? (
                     <Image
                         fill

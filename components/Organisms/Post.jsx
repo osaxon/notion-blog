@@ -7,7 +7,7 @@ export default async function Post({ slug }) {
     const blocks = await getBlocks(page.id);
 
     return (
-        <article className="flex flex-col gap-2">
+        <article className="flex flex-col gap-2 w-full">
             <PageCover page={page} />
             <BlockContent blocks={blocks} />
         </article>
