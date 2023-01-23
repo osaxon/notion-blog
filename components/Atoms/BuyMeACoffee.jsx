@@ -16,7 +16,7 @@ const BuyMeACoffee = () => {
                 height={24}
                 className="align-middle"
             />
-            <span className="ml-3 inline-flex items-center lg:text-lg text-sm font-bold align-middle">
+            <span className="ml-1 inline-flex items-center text-sm font-bold align-middle">
                 Buy me a Beer!
             </span>
         </a>

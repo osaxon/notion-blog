@@ -3,8 +3,9 @@ import Image from "next/image";
 import ReadTime from "./ReadTime";
 import { format } from "date-fns";
 
-function formatTime(dt) {
-    return format(new Date(dt), "dd-MMM-yyyy");
+function FormattedTime({ dt }) {
+    const time = format(new Date(dt), "dd-MMM-yyyy");
+    return <span className="font-mono italic text-base-content">{time}</span>;
 }
 
 const PageCover = ({ page }) => {
@@ -18,9 +19,7 @@ const PageCover = ({ page }) => {
                     {page?.properties.Name.title[0].text.content}
                 </h1>
                 <div className="flex gap-2 items-center">
-                    <p className="font-mono italic text-base-content">
-                        {formatTime(page.properties.Created.created_time)},
-                    </p>
+                    <FormattedTime dt={page.properties.Created.created_time} />
                     <ReadTime />
                 </div>
             </header>

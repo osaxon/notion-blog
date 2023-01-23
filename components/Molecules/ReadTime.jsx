@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 function calcReadTime(wordCount) {
     const wpm = 255;
@@ -9,6 +9,7 @@ function calcReadTime(wordCount) {
 
 const ReadTime = () => {
     const [wordCount, setWordCount] = useState(0);
+    let readTime = useRef();
 
     useEffect(() => {
         const elements = Array.from(document.querySelectorAll("p, h2"))
@@ -22,11 +23,12 @@ const ReadTime = () => {
             }
         });
         setWordCount(wordCount);
+        readTime.current = calcReadTime(wordCount);
     }, []);
 
     return (
         <span className="italic font-mono text-base-content">
-            {calcReadTime(wordCount)}m read
+            {readTime.current}m read
         </span>
     );
 };

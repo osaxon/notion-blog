@@ -11,7 +11,7 @@ export default async function Page({ params: { slug } }) {
     return (
         <main className="layout">
             <Suspense fallback={<PostSkeleton />}>
-                <section className="flex flex-col sm:flex-row gap-x-4 py-10 w-full">
+                <section className="flex flex-col md:flex-row gap-x-4 py-10 w-full">
                     <Post slug={slug} />
                     <SideBar />
                 </section>

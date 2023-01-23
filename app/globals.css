@@ -6,7 +6,7 @@
     .layout {
         /* 1100px */
         max-width: 68.75rem;
-        @apply mx-auto w-11/12 md:w-5/6;
+        @apply mx-auto w-11/12;
     }
 
     .clip-path-heart {

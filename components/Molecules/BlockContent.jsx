@@ -1,11 +1,14 @@
-import { renderBlock } from "@/lib/helpers";
+import React from "react";
+import NotionBlock from "../Organisms/NotionBlock";
 
 const BlockContent = ({ blocks }) => {
     return (
         <div className="text-justify flex flex-col gap-2">
             {blocks &&
                 blocks.map((block) => (
-                    <div key={block.id}>{renderBlock(block)}</div>
+                    <React.Fragment key={block.id}>
+                        <NotionBlock block={block} />
+                    </React.Fragment>
                 ))}
         </div>
     );

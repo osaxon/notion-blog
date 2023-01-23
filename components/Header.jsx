@@ -104,7 +104,7 @@ export default function Header() {
                         </ul>
                     </div>
                 </nav>
-                <nav className="flex items-center layout h-full sm:hidden">
+                <nav className="flex items-center layout h-full md:hidden">
                     <MobileMenu links={navLinks} />
                 </nav>
             </header>
