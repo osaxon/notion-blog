@@ -3,14 +3,14 @@ import NotionBlock from "../Organisms/NotionBlock";
 
 const BlockContent = ({ blocks }) => {
     return (
-        <div className="text-justify w-full flex flex-col gap-2 border">
+        <section className="text-justify w-full flex flex-col gap-2">
             {blocks &&
                 blocks.map((block) => (
                     <React.Fragment key={block.id}>
                         <NotionBlock block={block} />
                     </React.Fragment>
                 ))}
-        </div>
+        </section>
     );
 };
 

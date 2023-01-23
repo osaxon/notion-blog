@@ -19,7 +19,7 @@ const PageCover = ({ page }) => {
             ? page?.cover.file.url
             : null;
     return (
-        <section>
+        <article>
             {page?.cover !== null ? (
                 <Image
                     alt="Cover image"
@@ -39,7 +39,7 @@ const PageCover = ({ page }) => {
                     src={imgUrl}
                 />
             ) : null}
-            <header className="flex layout items-center justify-center flex-col gap-2 py-12">
+            <div className="flex layout items-center justify-center flex-col gap-2 py-12">
                 <h1 className="md:text-4xl text-2xl font-bold">
                     {page?.icon !== null ? (
                         <Emoji symbol={page?.icon.emoji} />
@@ -50,8 +50,8 @@ const PageCover = ({ page }) => {
                     <FormattedTime dt={page.properties.Created.created_time} />
                     <ReadTime />
                 </div>
-            </header>
-        </section>
+            </div>
+        </article>
     );
 };
 

@@ -20,7 +20,7 @@ const LikeButton = ({ slug }) => {
     }
 
     return (
-        <div className="flex relative justify-center">
+        <div className="flex flex-col items-center gap-y-2">
             <Emoji
                 className={clsx(
                     "animate-bounce z-50 text-xl absolute left-4 bottom-6",
@@ -31,11 +31,11 @@ const LikeButton = ({ slug }) => {
             <button
                 disabled={userLikes >= 5}
                 onClick={() => handleClick()}
-                className="bg-accent clip-path-heart h-10 w-10 group hover:bg-accent-focus md:translate-x-2"
+                className="bg-accent scale-[2] origin-top-left clip-path-heart group hover:bg-accent-focus -translate-x-1"
             >
                 <div
                     className={clsx(
-                        "bg-primary w-10 group-hover:bg-primary-focus h-10 bg-top transition-transform duration-200",
+                        "bg-primary w-10 group-hover:bg-primary-focus transform-gpu h-10 bg-top transition-transform",
                         userLikes === 0
                             ? "translate-y-8"
                             : userLikes === 1
