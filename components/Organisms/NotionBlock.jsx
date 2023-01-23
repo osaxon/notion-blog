@@ -1,9 +1,13 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Emoji from "../Atoms/Emoji";
 import Image from "next/image";
 import Link from "next/link";
 import Heading from "../Atoms/Heading";
+import {
+    useBlogPostImages,
+    useBlogPostActions,
+} from "@/lib/context/blog-post-store";
 
 const BLOCK_TYPES = {
     h1: "heading_1",
@@ -17,6 +21,9 @@ const BLOCK_TYPES = {
 };
 
 const NotionBlock = ({ block }) => {
+    const images = useBlogPostImages();
+    const { addImage } = useBlogPostActions();
+
     switch (block.type) {
         case BLOCK_TYPES.h1:
             // For a heading
@@ -45,20 +52,28 @@ const NotionBlock = ({ block }) => {
             );
         case BLOCK_TYPES.image:
             // For an image
+            const imgUrl =
+                block[BLOCK_TYPES.image].type === "external"
+                    ? block[BLOCK_TYPES.image].external.url
+                    : block[BLOCK_TYPES.image].type === "file"
+                    ? block[BLOCK_TYPES.image].file.url
+                    : null;
+            const thisImage = images.filter((image) => image.url === imgUrl)[0];
             return (
                 <Image
                     alt="Cover image"
-                    width="0"
-                    height="0"
+                    width={thisImage?.width ? thisImage.width : "0"}
+                    height={thisImage?.height ? thisImage.height : "0"}
                     sizes="100vw"
                     className="w-full h-auto"
-                    src={
-                        block[BLOCK_TYPES.image].type === "external"
-                            ? block[BLOCK_TYPES.image].external.url
-                            : block[BLOCK_TYPES.image].type === "file"
-                            ? block[BLOCK_TYPES.image].file.url
-                            : null
-                    }
+                    onLoadingComplete={(e) => {
+                        addImage({
+                            url: imgUrl,
+                            width: e.naturalWidth,
+                            height: e.naturalHeight,
+                        });
+                    }}
+                    src={imgUrl}
                 />
             );
         case "bulleted_list_item":
