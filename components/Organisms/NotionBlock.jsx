@@ -62,17 +62,17 @@ const NotionBlock = ({ block }) => {
             return (
                 <Image
                     alt="Cover image"
-                    width={thisImage?.width ? thisImage.width : "0"}
-                    height={thisImage?.height ? thisImage.height : "0"}
-                    sizes="100vw"
-                    className="w-full h-auto"
+                    width={390}
+                    height={thisImage?.height ? 390 / thisImage.height : 390}
                     onLoadingComplete={(e) => {
                         addImage({
                             url: imgUrl,
                             width: e.naturalWidth,
                             height: e.naturalHeight,
+                            ratio: e.naturalWidth / e.naturalHeight,
                         });
                     }}
+                    className="md:w-full md:h-auto"
                     src={imgUrl}
                 />
             );
