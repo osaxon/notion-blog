@@ -3,7 +3,7 @@ import NotionBlock from "../Organisms/NotionBlock";
 
 const BlockContent = ({ blocks }) => {
     return (
-        <div className="text-justify flex flex-col gap-2">
+        <div className="text-justify w-full flex flex-col gap-2 border">
             {blocks &&
                 blocks.map((block) => (
                     <React.Fragment key={block.id}>

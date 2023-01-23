@@ -72,7 +72,7 @@ const NotionBlock = ({ block }) => {
                             ratio: e.naturalWidth / e.naturalHeight,
                         });
                     }}
-                    className="md:w-full md:h-auto"
+                    className="w-full h-auto"
                     src={imgUrl}
                 />
             );

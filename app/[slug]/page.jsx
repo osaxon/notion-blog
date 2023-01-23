@@ -16,7 +16,7 @@ export default async function Page({ params: { slug } }) {
             <Suspense fallback={<PostSkeleton />}>
                 <section className="flex flex-col gap-y-10 w-full">
                     <PageCover page={page} />
-                    <article className="flex layout flex-col md:flex-row gap-2">
+                    <article className="flex layout border justify-between flex-col md:flex-row gap-2">
                         <BlockContent blocks={blocks} />
                         <SideBar />
                     </article>
