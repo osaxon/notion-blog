@@ -69,7 +69,7 @@ export default async function FeaturedPosts() {
                                     </a>
                                 </div>
                                 <div className="flex items-end w-full">
-                                    <div className="w-full bg-secondary-content backdrop-blur-sm bg-opacity-40">
+                                    <div className="w-full bg-primary">
                                         <Link href={`/${getPostSlug(post)}`}>
                                             <div className="text-base-content  layout">
                                                 <h2 className="text-3xl font-bold">
