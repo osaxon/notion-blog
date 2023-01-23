@@ -11,22 +11,22 @@ function FormattedTime({ dt }) {
 const PageCover = ({ page }) => {
     return (
         <section>
-            <div className="relative w-full h-96">
-                {page?.cover !== null ? (
-                    <Image
-                        fill
-                        className="object-cover absolute"
-                        alt=""
-                        src={
-                            page?.cover.type === "external"
-                                ? page?.cover.external.url
-                                : page?.cover.type === "file"
-                                ? page?.cover.file.url
-                                : null
-                        }
-                    />
-                ) : null}
-            </div>
+            {page?.cover !== null ? (
+                <Image
+                    height="0"
+                    width="0"
+                    alt=""
+                    sizes="100vw"
+                    className="w-full h-[65vh] object-cover"
+                    src={
+                        page?.cover.type === "external"
+                            ? page?.cover.external.url
+                            : page?.cover.type === "file"
+                            ? page?.cover.file.url
+                            : null
+                    }
+                />
+            ) : null}
             <header className="flex layout items-center justify-center flex-col gap-2 py-12">
                 <h1 className="md:text-4xl text-2xl font-bold">
                     {page?.icon !== null ? (
