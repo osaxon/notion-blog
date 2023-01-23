@@ -14,13 +14,13 @@ export default async function FilteredPosts({ title, tag }) {
                     posts.map((post) => (
                         <li className="carousel-item" key={post.id}>
                             <Link href={`/${getPostSlug(post)}`}>
-                                <div className="relative">
+                                <div className="relative h-[300px]">
                                     <Image
                                         src={getPostCoverImage(post)}
                                         alt="cover image"
-                                        width={400}
+                                        width={300}
                                         height={300}
-                                        className="object-cover -z-50"
+                                        className="object-cover -z-50 h-full w-[300px]"
                                     />
                                     <p className="md:text-2xl text-xl absolute bottom-0 px-2 bg-zinc-400 bg-opacity-50 text-zinc-50 font-bold">
                                         {

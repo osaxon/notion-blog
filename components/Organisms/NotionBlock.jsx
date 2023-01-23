@@ -62,8 +62,8 @@ const NotionBlock = ({ block }) => {
             return (
                 <Image
                     alt="Cover image"
-                    width={390}
-                    height={thisImage?.height ? 390 / thisImage.height : 390}
+                    width={800}
+                    height={thisImage?.height ? 450 / thisImage.height : 450}
                     onLoadingComplete={(e) => {
                         addImage({
                             url: imgUrl,
