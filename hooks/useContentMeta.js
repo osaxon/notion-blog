@@ -1,5 +1,6 @@
-import apiClient from "../lib/axios";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+
+const BASE_URL = process.env.BASE_URL;
 
 export default function useContentMeta(slug) {
     const queryClient = useQueryClient();
@@ -8,8 +9,14 @@ export default function useContentMeta(slug) {
     const { data, status } = useQuery({
         queryKey: ["content_meta", slug],
         queryFn: async () => {
-            const response = await apiClient.get(`api/content/${slug}`);
-            return response.data;
+            const response = await fetch(`api/content/${slug}`, {
+                method: "GET",
+            });
+            const data = response.json();
+            if (response.status !== 200) {
+                throw new Error(data.error);
+            }
+            return data;
         },
         staleTime: 5 * 60 * 1000,
     });
@@ -20,7 +27,13 @@ export default function useContentMeta(slug) {
         status: mutateStatus,
     } = useMutation({
         // update the like count in the DB
-        mutationFn: async () => await apiClient.post(`api/like/${slug}`),
+        mutationFn: async () =>
+            await fetch(`api/like/${slug}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }),
         // optimistally update the state
         onMutate: async () => {
             // cancel any outgoing queries for fresh data

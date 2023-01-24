@@ -6,7 +6,6 @@ import { getPostSlug } from "@/lib/helpers";
 
 export default async function Page({ params: { slug } }) {
     const { page, blocks } = await getPageAndBlocks(slug);
-    console.log(blocks);
 
     return (
         <main className="flex flex-col gap-y-10 w-full">

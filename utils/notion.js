@@ -81,7 +81,6 @@ export const getBySlug = cache(async (slug) => {
 });
 
 export const getBlocks = cache(async (id) => {
-    console.log(id);
     const { results: blocks } = await client.blocks.children.list({
         block_id: id,
     });
