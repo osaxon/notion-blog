@@ -27,7 +27,7 @@ const PageCover = ({ page }) => {
                     height={
                         imageDetails?.height ? 500 / imageDetails.height : 500
                     }
-                    className="w-full h-[400px] object-cover"
+                    className="w-full h-[80vh] object-cover"
                     onLoadingComplete={(e) => {
                         setImageDetails({
                             url: imgUrl,
@@ -39,7 +39,7 @@ const PageCover = ({ page }) => {
                     src={imgUrl}
                 />
             ) : null}
-            <div className="flex layout items-center justify-center flex-col gap-2 py-12">
+            <div className="flex layout items-center justify-center flex-col gap-2 py-8">
                 <h1 className="md:text-4xl text-2xl font-bold">
                     {page?.icon !== null ? (
                         <Emoji symbol={page?.icon.emoji} />
