@@ -1,21 +1,20 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import {
-    getFeaturedPosts,
-    getPostsByTag,
-    getTags,
-    likePage,
-} from "@/utils/notion";
 import {
     getPostCoverImage,
     getPostTitle,
     getPostSlug,
     getPostExcerpt,
 } from "@/lib/helpers";
-import { ScreenSizes, ContainerSizes } from "../Atoms/TailwindContainerSizes";
+import {
+    useBlogPostImages,
+    useBlogPostActions,
+} from "@/lib/context/blog-post-store";
 
-export default async function FeaturedPosts() {
-    const { posts } = await getFeaturedPosts();
+export default function FeaturedPosts({ posts }) {
+    const images = useBlogPostImages();
+    const { addImage } = useBlogPostActions();
 
     function nextSlide(current) {
         const total = posts.length;
@@ -36,54 +35,82 @@ export default async function FeaturedPosts() {
     }
 
     return (
-        <section className="h-[70vh] w-full relative">
+        <section className="h-[90vh] w-full relative">
             <div className="absolute inset-0">
-                <ul className="w-full carousel min-h-full">
+                <ul className="carousel w-full">
                     {posts &&
-                        posts.map((post, index) => (
-                            <li
-                                className="relative carousel-item w-full min-h-full"
-                                key={post.id}
-                                id={`slide${index + 1}`}
-                            >
-                                <Image
-                                    src={getPostCoverImage(post)}
-                                    fill
-                                    alt="cover image"
-                                    className="absolute -z-50 object-cover"
-                                />
-                                <div className="absolute layout flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                                    <a
-                                        href={`#slide${previousSlide(
-                                            index + 1
-                                        )}`}
-                                        className="btn btn-circle text-base-content bg-secondary-content border-0 bg-opacity-50"
-                                    >
-                                        ❮
-                                    </a>
-                                    <a
-                                        href={`#slide${nextSlide(index + 1)}`}
-                                        className="btn btn-circle text-base-content bg-secondary-content border-0 bg-opacity-50"
-                                    >
-                                        ❯
-                                    </a>
-                                </div>
-                                <div className="flex items-end w-full">
-                                    <div className="w-full bg-primary">
-                                        <Link href={`/${getPostSlug(post)}`}>
-                                            <div className="text-base-content  layout">
-                                                <h2 className="text-3xl font-bold">
-                                                    {getPostTitle(post)}
-                                                </h2>
-                                                <p className="text-2xl">
-                                                    {getPostExcerpt(post)}
-                                                </p>
-                                            </div>
-                                        </Link>
+                        posts.map((post, index) => {
+                            const thisImage = images.filter(
+                                (image) => image.url === getPostCoverImage(post)
+                            )[0];
+                            return (
+                                <li
+                                    className="carousel-item relative w-full"
+                                    key={post.id}
+                                    id={`slide${index + 1}`}
+                                >
+                                    <Image
+                                        alt="Cover image"
+                                        width={800}
+                                        height={
+                                            thisImage?.height
+                                                ? 450 / thisImage.height
+                                                : 450
+                                        }
+                                        onLoadingComplete={(e) => {
+                                            addImage({
+                                                url: getPostCoverImage(post),
+                                                width: e.naturalWidth,
+                                                height: e.naturalHeight,
+                                                ratio:
+                                                    e.naturalWidth /
+                                                    e.naturalHeight,
+                                            });
+                                        }}
+                                        className="object-cover w-full h-[90vh]"
+                                        src={getPostCoverImage(post)}
+                                    />
+
+                                    {/* Carousel Navigation */}
+                                    <nav className="layout absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                                        <a
+                                            href={`#slide${previousSlide(
+                                                index + 1
+                                            )}`}
+                                            className="btn btn-circle btn-sm text-base-content bg-secondary-content border-0 bg-opacity-50"
+                                        >
+                                            ❮
+                                        </a>
+                                        <a
+                                            href={`#slide${nextSlide(
+                                                index + 1
+                                            )}`}
+                                            className="btn btn-circle btn-sm text-base-content bg-secondary-content border-0 bg-opacity-50"
+                                        >
+                                            ❯
+                                        </a>
+                                    </nav>
+
+                                    {/* Image caption and link */}
+                                    <div className="flex bottom-0 absolute items-end w-full">
+                                        <div className="w-full bg-base-200 bg-opacity-40">
+                                            <Link
+                                                href={`/${getPostSlug(post)}`}
+                                            >
+                                                <div className="text-base-content  layout">
+                                                    <h2 className="text-3xl font-bold">
+                                                        {getPostTitle(post)}
+                                                    </h2>
+                                                    <p className="text-2xl">
+                                                        {getPostExcerpt(post)}
+                                                    </p>
+                                                </div>
+                                            </Link>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                        ))}
+                                </li>
+                            );
+                        })}
                 </ul>
             </div>
         </section>
