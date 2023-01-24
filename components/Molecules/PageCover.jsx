@@ -27,7 +27,7 @@ const PageCover = ({ page }) => {
                     height={
                         imageDetails?.height ? 500 / imageDetails.height : 500
                     }
-                    className="w-full h-[80vh] object-cover"
+                    className="w-full h-[60vh] object-cover"
                     onLoadingComplete={(e) => {
                         setImageDetails({
                             url: imgUrl,

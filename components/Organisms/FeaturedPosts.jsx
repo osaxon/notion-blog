@@ -93,11 +93,11 @@ export default function FeaturedPosts({ posts }) {
 
                                     {/* Image caption and link */}
                                     <div className="flex bottom-0 absolute items-end w-full">
-                                        <div className="w-full bg-base-200 bg-opacity-40">
+                                        <div className="w-full bg-zinc-900">
                                             <Link
                                                 href={`/${getPostSlug(post)}`}
                                             >
-                                                <div className="text-base-content  layout">
+                                                <div className="text-base-100 layout">
                                                     <h2 className="text-3xl font-bold">
                                                         {getPostTitle(post)}
                                                     </h2>

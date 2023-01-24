@@ -28,6 +28,7 @@ const TableOfContents = () => {
 
     return (
         <nav>
+            <p className="font-bold text-xl mb-2">Contents:</p>
             <ul className="flex flex-col space-y-2">
                 {headings.map((heading) => (
                     <li key={heading.id}>
