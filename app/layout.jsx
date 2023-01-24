@@ -1,6 +1,8 @@
 import "./globals.css";
 import Header from "@/components/Header";
 import AppWrapper from "./AppWrapper";
+import { Suspense } from "react";
+import HomeSkeleton from "./HomeSkeleton";
 
 export default function RootLayout({ children }) {
     return (
@@ -12,10 +14,8 @@ export default function RootLayout({ children }) {
             <head />
 
             <body>
-                <AppWrapper>
-                    <Header />
-                    {children}
-                </AppWrapper>
+                <Header />
+                <AppWrapper>{children}</AppWrapper>
             </body>
         </html>
     );
