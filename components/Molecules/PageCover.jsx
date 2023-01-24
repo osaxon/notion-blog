@@ -12,15 +12,20 @@ function FormattedTime({ dt }) {
 
 const PageCover = ({ page }) => {
     const [imageDetails, setImageDetails] = useState();
-    const imgUrl =
-        page?.cover.type === "external"
-            ? page?.cover.external.url
-            : page?.cover.type === "file"
-            ? page?.cover.file.url
-            : null;
+    let imgUrl;
+
+    if (page.cover) {
+        imgUrl =
+            page?.cover.type === "external"
+                ? page?.cover.external.url
+                : page?.cover.type === "file"
+                ? page?.cover.file.url
+                : null;
+    }
+
     return (
         <article>
-            {page?.cover !== null ? (
+            {page && page?.cover !== null ? (
                 <Image
                     alt="Cover image"
                     width={800}

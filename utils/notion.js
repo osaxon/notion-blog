@@ -89,7 +89,16 @@ export const getBlocks = cache(async (id) => {
 
 export const getPageAndBlocks = cache(async (slug) => {
     const page = await getBySlug(slug);
-    const blocks = await getBlocks(page.id);
+    let blocks = await getBlocks(page.id);
+    blocks = await Promise.all(
+        blocks.map(async (block) => {
+            if (block.has_children) {
+                return { ...block, children: await getBlocks(block.id) };
+            } else {
+                return { ...block };
+            }
+        })
+    );
     return { page, blocks };
 });
 

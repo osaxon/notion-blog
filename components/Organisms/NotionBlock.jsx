@@ -18,6 +18,8 @@ const BLOCK_TYPES = {
     image: "image",
     bulletedListItem: "bulleted_list_item",
     callout: "callout",
+    columnList: "column_list",
+    column: "column",
 };
 
 const NotionBlock = ({ block }) => {
@@ -100,8 +102,12 @@ const NotionBlock = ({ block }) => {
                 </li>
             );
 
-        case "column_list":
-            return <div className="columns-2"></div>;
+        case BLOCK_TYPES.columnList:
+            console.log(block);
+            return;
+        case BLOCK_TYPES.column:
+            console.log(block);
+            return;
         case BLOCK_TYPES.paragraph:
             // For a paragraph
             return (
