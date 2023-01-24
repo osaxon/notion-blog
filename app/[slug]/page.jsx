@@ -1,12 +1,12 @@
 import React from "react";
 import { PageCover, BlockContent } from "@/components/Molecules";
 import SideBar from "@/components/Organisms/SideBar";
-import { getPosts, getBlocks, getBySlug } from "@/utils/notion";
+import { getPageAndBlocks, getPosts } from "@/utils/notion";
 import { getPostSlug } from "@/lib/helpers";
 
 export default async function Page({ params: { slug } }) {
-    const page = await getBySlug(slug);
-    const blocks = await getBlocks(page.id);
+    const { page, blocks } = await getPageAndBlocks(slug);
+    console.log(blocks);
 
     return (
         <main className="flex flex-col gap-y-10 w-full">
