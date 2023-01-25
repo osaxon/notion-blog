@@ -36,13 +36,13 @@ const NotionBlock = ({ block }) => {
             );
         case BLOCK_TYPES.h2:
             return (
-                <Heading as="h2" className="text-2xl font-bold">
+                <Heading as="h2" className="text-2xl font-bold py-4">
                     {block[BLOCK_TYPES.h2].rich_text[0].plain_text}
                 </Heading>
             );
         case BLOCK_TYPES.h3:
             return (
-                <Heading as="h3" className="text-xl font-bold">
+                <Heading as="h3" className="text-lg font-bold pt-3">
                     {block[BLOCK_TYPES.h3].rich_text[0].plain_text}
                 </Heading>
             );

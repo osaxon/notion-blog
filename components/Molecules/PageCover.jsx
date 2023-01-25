@@ -44,7 +44,7 @@ const PageCover = ({ page }) => {
                     src={imgUrl}
                 />
             ) : null}
-            <div className="flex border relative items-center justify-center flex-col gap-2 py-8">
+            <div className="flex relative items-center justify-center flex-col gap-2 py-8">
                 {page?.icon !== null ? (
                     <Emoji
                         className="absolute -top-12 text-[4rem]"

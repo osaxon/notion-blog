@@ -25,18 +25,20 @@ export default function FeaturedPosts({ posts }) {
                             (image) => image.url === getPostCoverImage(post)
                         )[0];
                         return (
-                            <li
-                                className="group relative h-80 overflow-hidden"
+                            <Link
+                                href={`/${getPostSlug(post)}`}
                                 key={post.id}
                                 id={`slide${index + 1}`}
                             >
-                                <Image
-                                    alt="Cover image"
-                                    fill
-                                    className="object-cover group-hover:scale-[1.02] duration-200 ease-in-out transition-transform"
-                                    src={getPostCoverImage(post)}
-                                />
-                            </li>
+                                <li className="group relative h-80 overflow-hidden">
+                                    <Image
+                                        alt="Cover image"
+                                        fill
+                                        className="object-cover group-hover:scale-[1.02] duration-200 ease-in-out transition-transform"
+                                        src={getPostCoverImage(post)}
+                                    />
+                                </li>
+                            </Link>
                         );
                     })}
             </ul>

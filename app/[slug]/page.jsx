@@ -15,8 +15,8 @@ export default async function Page({ params: { slug } }) {
         <Suspense fallback={<div>Loading...</div>}>
             <main>
                 <PageCover page={page} />
-                <article className="layout flex flex-col md:flex-row">
-                    <section>
+                <article className="layout relative bg-white flex flex-col md:flex-row">
+                    <section className="max-w-[700px] text-justify px-4 md:pl-10 md:pr-4">
                         {blocks.map((block) => (
                             <React.Fragment key={block.id}>
                                 <NotionBlock block={block} />
@@ -24,7 +24,7 @@ export default async function Page({ params: { slug } }) {
                         ))}
                     </section>
 
-                    <aside className="basis-40">
+                    <aside className="flex-grow px-4">
                         <SideBar />
                     </aside>
                 </article>

@@ -1,13 +1,13 @@
 "use client";
 import Link from "next/link";
 import { Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 
 export default function MobileMenu({ links }) {
     return (
         <Menu as="div" className="relative">
             <Menu.Button className="inline-flex items-center justify-center py-2">
-                <Bars3Icon className="bloc bg-secondary-content text-secondary-content rounded-full p-2 h-10 w-10" />
+                <Bars3Icon className="bloc text-primary rounded-full p-2 h-10 w-10" />
             </Menu.Button>
             <Transition
                 enter="transition duration-100 ease-out"
@@ -17,7 +17,7 @@ export default function MobileMenu({ links }) {
                 leaveFrom="transform scale-100 opacity-100"
                 leaveTo="transform scale-95 opacity-0"
             >
-                <Menu.Items className="absolute left-0 z-10 w-48 origin-top-right rounded-sm bg-secondary-content py-2 flex flex-col">
+                <Menu.Items className="absolute left-0 z-10 w-48 origin-top-right rounded-sm bg-primary backdrop-blur-lg py-2 flex flex-col">
                     {links.length > 0 &&
                         links.map((l) => (
                             <Menu.Item key={l.title}>

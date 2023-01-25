@@ -9,10 +9,11 @@ const SideBar = () => {
     const slug = usePathname().split("/")[1];
 
     return (
-        <div className="flex border sticky top-20 flex-col justify-center items-center w-full">
+        <div className="flex sticky top-20 flex-col  items-center w-full gap-20">
             <TableOfContents />
-            <LikeButton slug={slug} />
-            <div>
+
+            <div className="flex flex-col gap-4">
+                <LikeButton slug={slug} />
                 <BuyMeACoffee />
             </div>
         </div>
