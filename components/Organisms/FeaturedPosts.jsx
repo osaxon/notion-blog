@@ -51,11 +51,11 @@ export default function FeaturedPosts({ posts }) {
                                 >
                                     <Image
                                         alt="Cover image"
-                                        width={800}
+                                        width={1280}
                                         height={
                                             thisImage?.height
-                                                ? 450 / thisImage.height
-                                                : 450
+                                                ? 720 / thisImage.height
+                                                : 720
                                         }
                                         onLoadingComplete={(e) => {
                                             addImage({
