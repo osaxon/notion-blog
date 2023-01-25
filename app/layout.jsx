@@ -6,6 +6,7 @@ import "prismjs/themes/prism-tomorrow.css";
 
 // used for rendering equations (optional)
 import "katex/dist/katex.min.css";
+
 import "./globals.css";
 import Header from "@/components/Header";
 import AppWrapper from "./AppWrapper";

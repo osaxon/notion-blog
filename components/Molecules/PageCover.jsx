@@ -24,7 +24,7 @@ const PageCover = ({ page }) => {
     }
 
     return (
-        <article>
+        <>
             {page && page?.cover !== null ? (
                 <Image
                     alt="Cover image"
@@ -32,7 +32,7 @@ const PageCover = ({ page }) => {
                     height={
                         imageDetails?.height ? 500 / imageDetails.height : 500
                     }
-                    className="w-full h-[60vh] object-cover"
+                    className="w-full h-[33vh] object-cover"
                     onLoadingComplete={(e) => {
                         setImageDetails({
                             url: imgUrl,
@@ -44,11 +44,14 @@ const PageCover = ({ page }) => {
                     src={imgUrl}
                 />
             ) : null}
-            <div className="flex layout items-center justify-center flex-col gap-2 py-8">
+            <div className="flex border relative items-center justify-center flex-col gap-2 py-8">
+                {page?.icon !== null ? (
+                    <Emoji
+                        className="absolute -top-12 text-[4rem]"
+                        symbol={page?.icon.emoji}
+                    />
+                ) : null}
                 <h1 className="md:text-4xl text-2xl font-bold">
-                    {page?.icon !== null ? (
-                        <Emoji symbol={page?.icon.emoji} />
-                    ) : null}
                     {page?.properties.Name.title[0].text.content}
                 </h1>
                 <div className="flex gap-2 items-center">
@@ -56,7 +59,7 @@ const PageCover = ({ page }) => {
                     <ReadTime />
                 </div>
             </div>
-        </article>
+        </>
     );
 };
 

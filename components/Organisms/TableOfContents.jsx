@@ -15,6 +15,7 @@ function useHeadings() {
                 level: Number(element.tagName.substring(1)),
             }));
         setHeadings(elements);
+        console.log(elements);
     }, []);
     return headings;
 }
@@ -27,17 +28,18 @@ const TableOfContents = () => {
     );
 
     return (
-        <nav>
-            <p className="font-bold text-xl mb-2">Contents:</p>
-            <ul className="flex flex-col space-y-2">
+        <nav className="hidden md:block">
+            <p className="font-bold text-lg mb-2">Contents:</p>
+            <ul className="flex flex-col space-y-1">
                 {headings.map((heading) => (
                     <li key={heading.id}>
                         <a
                             className={clsx(
-                                "font-medium text-primary-content text-xl",
+                                "font-medium text-primary-content text-lg",
                                 activeId === heading.id
                                     ? "font-bold md:text-primary-focus sm:text-primary-content"
-                                    : "font-normal"
+                                    : "font-normal",
+                                heading.level === 3 ? "ml-2 text-base" : ""
                             )}
                             href={`#${heading.id}`}
                         >

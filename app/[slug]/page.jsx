@@ -1,16 +1,36 @@
 import React from "react";
+import { Suspense } from "react";
 import { PageCover, BlockContent } from "@/components/Molecules";
-import { getBySlug, getPageAndBlocks, getPosts } from "@/utils/notion";
+import { getPageAndBlocks, getPosts } from "@/utils/notion";
 import { getPostSlug } from "@/lib/helpers";
+import SideBar from "@/components/Organisms/SideBar";
 import NotionBlock from "@/components/Organisms/NotionBlock";
-import { getBlogPost } from "@/lib/notionAPI";
-import NotionPage from "../NotionPage";
 
 export default async function Page({ params: { slug } }) {
-    const post = await getBySlug(slug);
+    const _blocks = getPageAndBlocks(slug);
 
-    const blogPost = await getBlogPost(post.id);
-    return <NotionPage recordMap={blogPost} />;
+    const { page, blocks } = await _blocks;
+
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <main>
+                <PageCover page={page} />
+                <article className="layout flex flex-col md:flex-row">
+                    <section>
+                        {blocks.map((block) => (
+                            <React.Fragment key={block.id}>
+                                <NotionBlock block={block} />
+                            </React.Fragment>
+                        ))}
+                    </section>
+
+                    <aside className="basis-40">
+                        <SideBar />
+                    </aside>
+                </article>
+            </main>
+        </Suspense>
+    );
 }
 
 export async function generateStaticParams() {
