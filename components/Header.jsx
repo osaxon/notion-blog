@@ -8,6 +8,7 @@ import {
     useMobileMenuActions,
 } from "@/lib/context/mobile-menu-store";
 import MobileMenu from "./Molecules/MobileMenu";
+import siteConfig from "../site.config";
 
 const navLinks = [
     {
@@ -66,19 +67,17 @@ export default function Header() {
         >
             <header
                 className={clsx(
-                    "relative h-16 mx-auto transition-colors bg-transparent border-b border-transparent duration-200 group-hover:bg-secondary-content group-hover:border-gray-200",
+                    "relative h-16 mx-auto transition-colors bg-transparent border-b border-transparent duration-200 group-hover:backdrop-blur-md",
                     {
-                        "!bg-secondary-content !border-gray-200":
-                            !isHome || isScrolled,
+                        "!backdrop-blur-md": !isHome || isScrolled,
                     }
                 )}
             >
                 <nav
                     className={clsx(
-                        "text-gray-900 layout items-center justify-between h-full text-xs leading-5 font-normal transition-colors duration-200 hidden md:flex",
+                        "text-white layout items-center justify-between h-full text-xs leading-5 font-normal transition-colors duration-200 hidden md:flex",
                         {
-                            "text-white group-hover:text-gray-900":
-                                isHome && !isScrolled,
+                            "group-hover:text-error": isHome && !isScrolled,
                         }
                     )}
                 >
@@ -87,7 +86,7 @@ export default function Header() {
                             className="text-2xl leading-[36px] font-semibold uppercase"
                             href="/"
                         >
-                            Travel Blog
+                            {siteConfig.name}
                         </Link>
                         <ul className="flex gap-x-4">
                             {navLinks.length > 0 &&

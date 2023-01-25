@@ -31,10 +31,10 @@ export const getPlaces = cache(async (startCursor = undefined) => {
     return { places, next_cursor, has_more, page };
 });
 
-export const getFeaturedPosts = cache(async () => {
+export const getFeaturedPosts = cache(async ({ limit = 5 }) => {
     const { results: posts } = await client.databases.query({
         database_id: POSTS_DB,
-        page_size: 10,
+        page_size: limit,
     });
     return { posts };
 });

@@ -6,8 +6,8 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 export default function MobileMenu({ links }) {
     return (
         <Menu as="div" className="relative">
-            <Menu.Button className="text-black font-bold text-2xl inline-flex items-center justify-center py-2">
-                <Bars3Icon className="bloc bg-secondary-content text-base-content rounded-full p-2 h-10 w-10" />
+            <Menu.Button className="inline-flex items-center justify-center py-2">
+                <Bars3Icon className="bloc bg-secondary-content text-secondary-content rounded-full p-2 h-10 w-10" />
             </Menu.Button>
             <Transition
                 enter="transition duration-100 ease-out"

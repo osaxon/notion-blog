@@ -15,14 +15,14 @@ import HomeSkeleton from "./HomeSkeleton";
 
 export default function RootLayout({ children }) {
     return (
-        <html lang="en" data-theme="emerald">
+        <html lang="en" data-theme="cyberpunk">
             {/*
         <head /> will contain the components returned by the nearest parent
         head.jsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
             <head />
 
-            <body>
+            <body className="">
                 <Header />
                 <AppWrapper>{children}</AppWrapper>
             </body>
