@@ -8,6 +8,7 @@ import {
     useBlogPostImages,
     useBlogPostActions,
 } from "@/lib/context/blog-post-store";
+import clsx from "clsx";
 
 const BLOCK_TYPES = {
     h1: "heading_1",
@@ -24,7 +25,11 @@ const BLOCK_TYPES = {
 
 const NotionBlock = ({ block }) => {
     const images = useBlogPostImages();
-    const { addImage } = useBlogPostActions();
+    const { addImage, zoom } = useBlogPostActions();
+
+    useEffect(() => {
+        console.log(images);
+    }, [images]);
 
     switch (block.type) {
         case BLOCK_TYPES.h1:
@@ -62,21 +67,34 @@ const NotionBlock = ({ block }) => {
                     : null;
             const thisImage = images.filter((image) => image.url === imgUrl)[0];
             return (
-                <Image
-                    alt="Cover image"
-                    width={800}
-                    height={thisImage?.height ? 450 / thisImage.height : 450}
-                    onLoadingComplete={(e) => {
-                        addImage({
-                            url: imgUrl,
-                            width: e.naturalWidth,
-                            height: e.naturalHeight,
-                            ratio: e.naturalWidth / e.naturalHeight,
-                        });
-                    }}
-                    className="w-full h-auto"
-                    src={imgUrl}
-                />
+                <>
+                    <Image
+                        alt="Cover image"
+                        width={800}
+                        height={
+                            thisImage?.height ? 450 / thisImage.height : 450
+                        }
+                        onLoadingComplete={(e) => {
+                            addImage({
+                                url: imgUrl,
+                                width: e.naturalWidth,
+                                height: e.naturalHeight,
+                                ratio: e.naturalWidth / e.naturalHeight,
+                                zoomed: false,
+                            });
+                        }}
+                        onClick={() =>
+                            zoom({ imgUrl, zoomed: !thisImage.zoomed })
+                        }
+                        className={clsx(
+                            "w-full h-auto",
+                            { "cursor-zoom-in": !thisImage?.zoomed },
+                            { "cursor-zoom-out": thisImage?.zoomed }
+                        )}
+                        src={imgUrl}
+                    />
+                    <span>{JSON.stringify(thisImage, null, 2)}</span>
+                </>
             );
         case "bulleted_list_item":
             // For an unordered list
