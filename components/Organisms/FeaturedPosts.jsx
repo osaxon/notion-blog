@@ -23,7 +23,10 @@ export default function FeaturedPosts({ posts }) {
     }, [images]);
 
     return (
-        <section className="layout @container">
+        <section className="layout flex flex-col items-start @container">
+            <h2 className="text-xl font-bold font-mono bg-primary text-base-100 mb-2">
+                {"/// Featured Posts"}
+            </h2>
             <ul className="@lg:columns-3 columns-1 @md:columns-2 gap-4">
                 {posts &&
                     posts.map((post, index) => {
@@ -62,13 +65,18 @@ export default function FeaturedPosts({ posts }) {
                                 />
                                 <Link
                                     className="absolute text-sm text-base-100 bottom-0 z-50 bg-primary"
-                                    href="/"
+                                    href={`/${getPostSlug(post)}`}
                                 >
                                     {getPostTitle(post)}
                                 </Link>
                             </li>
                         );
                     })}
+                <li className="font-mono flex italic hover:bg-warning hover:text-primary items-end h-16 border bg-primary text-base-100 font-bold">
+                    <Link className="h-full" href="/">
+                        <p>View More...</p>
+                    </Link>
+                </li>
             </ul>
         </section>
     );
