@@ -1,30 +1,42 @@
 "use client";
 import Image from "next/image";
+import { useState } from "react";
 import {
     useZoomedImageURL,
     useIsZoomed,
     useBlogPostActions,
+    useBlogPostImages,
 } from "@/lib/context/blog-post-store";
+import clsx from "clsx";
 
-const ZoomedImage = () => {
+const ZoomedImageBackDrop = ({ children }) => {
     const zoomedImageURL = useZoomedImageURL();
-    const { zoom } = useBlogPostActions();
+    const images = useBlogPostImages();
+    const { setZoomedImg, toggleZoom } = useBlogPostActions();
     const isZoomed = useIsZoomed();
-    if (!isZoomed) return null;
+    let thisImage = images.filter((image) => image.url === zoomedImageURL)[0];
 
     return (
-        <figure
-            onClick={() => zoom({ zoomedImageURL, zoomed: false })}
-            className="fixed bg-neutral bg-opacity-50 flex justify-center items-center px-4 backdrop-blur-md z-50 top-0 left-0 w-screen h-screen"
+        <div
+            onClick={() => {
+                toggleZoom();
+                setZoomedImg(undefined);
+            }}
+            className={clsx(
+                !isZoomed
+                    ? "hidden scale-0"
+                    : "fixed bg-zinc-800 scale-105 bg-opacity-70 flex justify-center w-screen h-screen items-center p-10 backdrop-blur-md z-50 top-0 left-0"
+            )}
         >
             <Image
+                width={thisImage?.width}
+                height={thisImage?.height}
                 src={zoomedImageURL}
-                fill
-                alt={zoomedImageURL}
-                className="object-contain"
+                className="object-contain max-h-screen p-10"
+                alt=""
             />
-        </figure>
+        </div>
     );
 };
 
-export default ZoomedImage;
+export default ZoomedImageBackDrop;

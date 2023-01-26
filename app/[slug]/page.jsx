@@ -9,7 +9,6 @@ import NotionBlock from "@/components/Organisms/NotionBlock";
 
 export default async function Page({ params: { slug } }) {
     const _blocks = getPageAndBlocks(slug);
-
     const { page, blocks } = await _blocks;
 
     return (
@@ -17,8 +16,8 @@ export default async function Page({ params: { slug } }) {
             <main className="relative">
                 <PageCover page={page} />
                 <ZoomedImage />
-                <article className="layout bg-white flex flex-col md:flex-row">
-                    <section className="max-w-[700px] text-justify px-4 md:pl-10 md:pr-4">
+                <article className="layout bg-white gap-x-px flex flex-col md:flex-row">
+                    <section className="px-10">
                         {blocks.map((block) => (
                             <React.Fragment key={block.id}>
                                 <NotionBlock block={block} />

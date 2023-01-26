@@ -3,6 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Emoji from "../Atoms/Emoji";
 import Image from "next/image";
 import Link from "next/link";
+import ZoomedImageBackDrop from "../Molecules/ZoomedImage";
 import Heading from "../Atoms/Heading";
 import {
     useBlogPostImages,
@@ -28,6 +29,7 @@ const BLOCK_TYPES = {
 const NotionBlock = ({ block }) => {
     const images = useBlogPostImages();
     const zoomedImageURL = useZoomedImageURL();
+    const isZoomed = useIsZoomed();
     const { addImage, zoom, toggleZoom, setZoomedImg } = useBlogPostActions();
 
     switch (block.type) {
@@ -65,13 +67,9 @@ const NotionBlock = ({ block }) => {
                     ? block[BLOCK_TYPES.image].file.url
                     : null;
             let thisImage = images.filter((image) => image.url === imgUrl)[0];
+
             return (
-                <figure
-                    className={clsx("p-2 relative h-auto w-full", {
-                        "bg-red-400": zoomedImageURL === thisImage?.url,
-                        " bg-blue-400": !zoomedImageURL === thisImage?.url,
-                    })}
-                >
+                <figure className="relative flex justify-center">
                     <Image
                         alt="Cover image"
                         width={800}
@@ -94,7 +92,6 @@ const NotionBlock = ({ block }) => {
                         className="object-cover"
                         src={imgUrl}
                     />
-                    <span>{JSON.stringify(thisImage, null, 2)}</span>
                 </figure>
             );
         case "bulleted_list_item":
