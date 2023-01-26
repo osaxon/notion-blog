@@ -17,7 +17,7 @@ export default async function Page({ params: { slug } }) {
                 <PageCover page={page} />
                 <ZoomedImage />
                 <article className="layout bg-white gap-x-px flex flex-col md:flex-row">
-                    <section className="px-10">
+                    <section className="px-4">
                         {blocks.map((block) => (
                             <React.Fragment key={block.id}>
                                 <NotionBlock block={block} />

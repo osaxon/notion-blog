@@ -69,10 +69,10 @@ const NotionBlock = ({ block }) => {
             let thisImage = images.filter((image) => image.url === imgUrl)[0];
 
             return (
-                <figure className="relative flex justify-center">
+                <figure className="relative flex justify-center py-8">
                     <Image
                         alt="Cover image"
-                        width={800}
+                        width={600}
                         height={
                             thisImage?.height ? 450 / thisImage?.height : 450
                         }
@@ -82,6 +82,10 @@ const NotionBlock = ({ block }) => {
                                 width: e.naturalWidth,
                                 height: e.naturalHeight,
                                 ratio: e.naturalWidth / e.naturalHeight,
+                                orientation:
+                                    e.naturalWidth > e.naturalHeight
+                                        ? "landscape"
+                                        : "portrait",
                                 zoomed: false,
                             });
                         }}
@@ -89,7 +93,10 @@ const NotionBlock = ({ block }) => {
                             setZoomedImg(imgUrl);
                             toggleZoom();
                         }}
-                        className="object-cover"
+                        className={clsx(
+                            "object-cover h-auto",
+                            !isZoomed ? "cursor-zoom-in" : ""
+                        )}
                         src={imgUrl}
                     />
                 </figure>
