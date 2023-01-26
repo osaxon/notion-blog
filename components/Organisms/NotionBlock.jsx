@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Emoji from "../Atoms/Emoji";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,6 +7,8 @@ import Heading from "../Atoms/Heading";
 import {
     useBlogPostImages,
     useBlogPostActions,
+    useIsZoomed,
+    useZoomedImageURL,
 } from "@/lib/context/blog-post-store";
 import clsx from "clsx";
 
@@ -25,11 +27,8 @@ const BLOCK_TYPES = {
 
 const NotionBlock = ({ block }) => {
     const images = useBlogPostImages();
-    const { addImage, zoom } = useBlogPostActions();
-
-    useEffect(() => {
-        console.log(images);
-    }, [images]);
+    const zoomedImageURL = useZoomedImageURL();
+    const { addImage, zoom, toggleZoom, setZoomedImg } = useBlogPostActions();
 
     switch (block.type) {
         case BLOCK_TYPES.h1:
@@ -65,14 +64,19 @@ const NotionBlock = ({ block }) => {
                     : block[BLOCK_TYPES.image].type === "file"
                     ? block[BLOCK_TYPES.image].file.url
                     : null;
-            const thisImage = images.filter((image) => image.url === imgUrl)[0];
+            let thisImage = images.filter((image) => image.url === imgUrl)[0];
             return (
-                <>
+                <figure
+                    className={clsx("p-2 relative h-auto w-full", {
+                        "bg-red-400": zoomedImageURL === thisImage?.url,
+                        " bg-blue-400": !zoomedImageURL === thisImage?.url,
+                    })}
+                >
                     <Image
                         alt="Cover image"
                         width={800}
                         height={
-                            thisImage?.height ? 450 / thisImage.height : 450
+                            thisImage?.height ? 450 / thisImage?.height : 450
                         }
                         onLoadingComplete={(e) => {
                             addImage({
@@ -83,18 +87,15 @@ const NotionBlock = ({ block }) => {
                                 zoomed: false,
                             });
                         }}
-                        onClick={() =>
-                            zoom({ imgUrl, zoomed: !thisImage.zoomed })
-                        }
-                        className={clsx(
-                            "w-full h-auto",
-                            { "cursor-zoom-in": !thisImage?.zoomed },
-                            { "cursor-zoom-out": thisImage?.zoomed }
-                        )}
+                        onClick={() => {
+                            setZoomedImg(imgUrl);
+                            toggleZoom();
+                        }}
+                        className="object-cover"
                         src={imgUrl}
                     />
                     <span>{JSON.stringify(thisImage, null, 2)}</span>
-                </>
+                </figure>
             );
         case "bulleted_list_item":
             // For an unordered list

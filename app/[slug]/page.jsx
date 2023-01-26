@@ -4,6 +4,7 @@ import { PageCover, BlockContent } from "@/components/Molecules";
 import { getPageAndBlocks, getPosts } from "@/utils/notion";
 import { getPostSlug } from "@/lib/helpers";
 import SideBar from "@/components/Organisms/SideBar";
+import ZoomedImage from "@/components/Molecules/ZoomedImage";
 import NotionBlock from "@/components/Organisms/NotionBlock";
 
 export default async function Page({ params: { slug } }) {
@@ -13,9 +14,10 @@ export default async function Page({ params: { slug } }) {
 
     return (
         <Suspense fallback={<div>Loading...</div>}>
-            <main>
+            <main className="relative">
                 <PageCover page={page} />
-                <article className="layout relative bg-white flex flex-col md:flex-row">
+                <ZoomedImage />
+                <article className="layout bg-white flex flex-col md:flex-row">
                     <section className="max-w-[700px] text-justify px-4 md:pl-10 md:pr-4">
                         {blocks.map((block) => (
                             <React.Fragment key={block.id}>
