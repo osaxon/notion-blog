@@ -22,15 +22,15 @@ export default function LatestPost({ post }) {
     return (
         <section className="w-full relative">
             <Link href={`/${getPostSlug(post)}`}>
-                <div className="absolute p-4 border-dashed left-8 md:hover:scale-[1.02] md:hover:bg-info duration-300 md:hover:bg-opacity-10 md:hover:shadow-lg md:hover:backdrop-blur-sm ease-in-out md:hover:border-2 transition-all origin-bottom-left top-48 flex flex-col gap-4">
-                    <h2 className=" font-serif italic text-3xl md:text-5xl text-base-100 mr-10">
+                <div className="absolute p-4 border-dashed left-8 top-48 flex flex-col items-end gap-4">
+                    <h2 className="font-serif text-base-100 font-bold italic text-3xl md:text-5xl mr-10">
                         Latest adventure...
                     </h2>
-                    <h2 className="text-3xl md:text-5xl text-right text-base-100 font-bold uppercase">
+                    <h2 className="text-3xl md:text-5xl text-warning text-right bg-base-100 bg-opacity-40 backdrop-blur-sm font-bold uppercase">
                         {getPostTitle(post)}
                     </h2>
-                    <p className="text-lg italic bg-accent text-base-100">
-                        {getPostExcerpt(post)}
+                    <p className="text-lg w-full font-mono italic bg-primary text-base-100 text-center">
+                        {">>> " + getPostExcerpt(post) + " <<<"}
                     </p>
                 </div>
             </Link>
@@ -44,6 +44,10 @@ export default function LatestPost({ post }) {
                         width: e.naturalWidth,
                         height: e.naturalHeight,
                         ratio: e.naturalWidth / e.naturalHeight,
+                        orientation:
+                            e.naturalWidth > e.naturalHeight
+                                ? "landscape"
+                                : "portrait",
                     });
                 }}
                 className="object-cover w-full h-[70vh]"

@@ -69,7 +69,8 @@ export default function Header() {
                 className={clsx(
                     "relative h-16 mx-auto transition-colors bg-transparent border-b border-transparent duration-200 group-hover:backdrop-blur-md",
                     {
-                        "!backdrop-blur-md": !isHome || isScrolled,
+                        "!backdrop-blur-md bg-base-100 bg-opacity-25":
+                            !isHome || isScrolled,
                     }
                 )}
             >
@@ -77,7 +78,7 @@ export default function Header() {
                     className={clsx(
                         "text-white layout items-center justify-between h-full text-xs leading-5 font-normal transition-colors duration-200 hidden md:flex",
                         {
-                            "group-hover:text-error": isHome && !isScrolled,
+                            "group-hover:text-warning": isHome && !isScrolled,
                         }
                     )}
                 >
