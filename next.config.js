@@ -13,6 +13,7 @@ const nextConfig = {
             "s3.us-west-2.amazonaws.com",
             "via.placeholder.com",
             "www.notion.so",
+            "res.cloudinary.com",
         ],
     },
 };
