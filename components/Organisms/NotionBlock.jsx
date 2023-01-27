@@ -67,21 +67,23 @@ const NotionBlock = ({ block }) => {
                     ? block[BLOCK_TYPES.image].file.url
                     : null;
             let thisImage = images.filter((image) => image.url === imgUrl)[0];
-
+            console.log(thisImage);
             return (
                 <figure className="relative flex justify-center py-8">
                     <Image
                         alt="Cover image"
                         width={600}
-                        height={
-                            thisImage?.height ? 450 / thisImage?.height : 450
-                        }
+                        height={thisImage?.ratio ? thisImage?.ratio * 600 : 600}
                         onLoadingComplete={(e) => {
+                            console.log(e);
                             addImage({
                                 url: imgUrl,
                                 width: e.naturalWidth,
                                 height: e.naturalHeight,
-                                ratio: e.naturalWidth / e.naturalHeight,
+                                ratio:
+                                    Math.round(
+                                        (e.naturalHeight / e.naturalWidth) * 100
+                                    ) / 100,
                                 orientation:
                                     e.naturalWidth > e.naturalHeight
                                         ? "landscape"
