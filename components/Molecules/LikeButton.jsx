@@ -1,8 +1,7 @@
 "use client";
-import Emoji from "@/components/Atoms/Emoji";
-import { FiHeart } from "react-icons/fi";
-import useContentMeta from "@/hooks/useContentMeta";
-import { useEffect, useState } from "react";
+import Emoji from "../../components/Atoms/Emoji";
+import useContentMeta from "../../hooks/useContentMeta";
+import { useState } from "react";
 import clsx from "clsx";
 
 const LikeButton = ({ slug }) => {

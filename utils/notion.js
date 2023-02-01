@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { client } from "@/lib/notionClient";
+import { client } from "../lib/notionClient";
 import uniq from "lodash/uniq";
 
 const POSTS_DB = process.env.POSTS_DATABASE;

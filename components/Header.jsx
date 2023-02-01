@@ -6,28 +6,11 @@ import { usePathname } from "next/navigation";
 import {
     useMobileMenu,
     useMobileMenuActions,
-} from "@/lib/context/mobile-menu-store";
+} from "../lib/context/mobile-menu-store";
 import MobileMenu from "./Molecules/MobileMenu";
 import siteConfig from "../site.config";
 
-const navLinks = [
-    {
-        title: "Home",
-        href: "/",
-    },
-    {
-        title: "All Posts",
-        href: "/",
-    },
-    {
-        title: "Places",
-        href: "/",
-    },
-    {
-        title: "Transport",
-        href: "/",
-    },
-];
+const navLinks = siteConfig.navMenu;
 
 export default function Header() {
     const pathname = usePathname();

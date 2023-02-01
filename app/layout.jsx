@@ -7,11 +7,10 @@ import "prismjs/themes/prism-tomorrow.css";
 // used for rendering equations (optional)
 import "katex/dist/katex.min.css";
 
-import "./globals.css";
-import Header from "@/components/Header";
+import "../styles/index.css";
+
+import Header from "../components/Header";
 import AppWrapper from "./AppWrapper";
-import { Suspense } from "react";
-import HomeSkeleton from "./HomeSkeleton";
 
 export default function RootLayout({ children }) {
     return (

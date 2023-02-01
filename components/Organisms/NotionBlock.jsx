@@ -1,16 +1,15 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React from "react";
 import Emoji from "../Atoms/Emoji";
 import Image from "next/image";
 import Link from "next/link";
-import ZoomedImageBackDrop from "../Molecules/ZoomedImage";
 import Heading from "../Atoms/Heading";
 import {
     useBlogPostImages,
     useBlogPostActions,
     useIsZoomed,
     useZoomedImageURL,
-} from "@/lib/context/blog-post-store";
+} from "../../lib/context/blog-post-store";
 import clsx from "clsx";
 
 const BLOCK_TYPES = {

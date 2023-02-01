@@ -1,11 +1,11 @@
 import React from "react";
 import { Suspense } from "react";
-import { PageCover, BlockContent } from "@/components/Molecules";
-import { getPageAndBlocks, getPosts } from "@/utils/notion";
-import { getPostSlug } from "@/lib/helpers";
-import SideBar from "@/components/Organisms/SideBar";
-import ZoomedImage from "@/components/Molecules/ZoomedImage";
-import NotionBlock from "@/components/Organisms/NotionBlock";
+import { PageCover } from "../../components/Molecules";
+import { getPageAndBlocks, getPosts } from "../../utils/notion";
+import { getPostSlug } from "../../lib/helpers";
+import SideBar from "../../components/Organisms/SideBar";
+import ZoomedImage from "../../components/Molecules/ZoomedImage";
+import NotionBlock from "../../components/Organisms/NotionBlock";
 
 export default async function Page({ params: { slug } }) {
     const _blocks = getPageAndBlocks(slug);

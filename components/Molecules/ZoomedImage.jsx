@@ -1,12 +1,11 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
 import {
     useZoomedImageURL,
     useIsZoomed,
     useBlogPostActions,
     useBlogPostImages,
-} from "@/lib/context/blog-post-store";
+} from "../../lib/context/blog-post-store";
 import clsx from "clsx";
 
 const ZoomedImageBackDrop = ({ children }) => {

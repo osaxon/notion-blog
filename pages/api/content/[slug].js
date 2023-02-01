@@ -1,6 +1,6 @@
-import { getSessionId } from "@/lib/helper.server";
-import { prisma } from "@/lib/prisma";
-import { getUserLikes } from "@/lib/getUserLikes";
+import { getSessionId } from "../../../lib/helper.server";
+import { prisma } from "../../../lib/prisma";
+import { getUserLikes } from "../../../lib/getUserLikes";
 
 export default async function handler(req, res) {
     const sessionId = getSessionId(req);

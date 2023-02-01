@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import TableOfContents from "./TableOfContents";
-import { LikeButton } from "@/components/Molecules";
+import { LikeButton } from "../../components/Molecules";
 import { usePathname } from "next/navigation";
 import BuyMeACoffee from "../Atoms/BuyMeACoffee";
 

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import useScrollSpy from "@/hooks/useScrollSpy";
+import useScrollSpy from "../../hooks/useScrollSpy";
 import clsx from "clsx";
 
 function useHeadings() {

@@ -1,5 +1,5 @@
-import { FeaturedPosts, LatestPost } from "@/components/Organisms";
-import { getFeaturedPosts } from "@/utils/notion";
+import { FeaturedPosts, LatestPost } from "../components/Organisms";
+import { getFeaturedPosts } from "../utils/notion";
 
 export default async function Home() {
     const { posts } = await getFeaturedPosts({ limit: 6 });

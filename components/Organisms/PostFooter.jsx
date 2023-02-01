@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import LikeButton from "@/app/[slug]/LikeButton";
+import LikeButton from "../Molecules/LikeButton";
 import BuyMeACoffee from "../Atoms/BuyMeACoffee";
 import TableOfContents from "./TableOfContents";
 import { usePathname } from "next/navigation";

@@ -3,9 +3,13 @@ import Link from "next/link";
 import clsx from "clsx";
 import Emoji from "../Atoms/Emoji";
 import Image from "next/image";
-import useContentMeta from "@/hooks/useContentMeta";
+import useContentMeta from "../../hooks/useContentMeta";
 import React, { useState } from "react";
-import { getPostCoverImage, getPostSlug, getPostExcerpt } from "@/lib/helpers";
+import {
+    getPostCoverImage,
+    getPostSlug,
+    getPostExcerpt,
+} from "../../lib/helpers";
 
 const FeaturedCard = ({ post }) => {
     const [isLoading, setLoading] = useState(true);

@@ -1,6 +1,6 @@
-import { prisma } from "@/lib/prisma";
-import { getSessionId } from "@/lib/helper.server";
-import { getUserLikes } from "@/lib/getUserLikes";
+import { prisma } from "../../../lib/prisma";
+import { getSessionId } from "../../../lib/helper.server";
+import { getUserLikes } from "../../../lib/getUserLikes";
 
 export default async function handler(req, res) {
     const { slug } = req.query;

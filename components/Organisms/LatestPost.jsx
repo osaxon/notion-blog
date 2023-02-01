@@ -6,11 +6,11 @@ import {
     getPostTitle,
     getPostSlug,
     getPostExcerpt,
-} from "@/lib/helpers";
+} from "../../lib/helpers";
 import {
     useBlogPostImages,
     useBlogPostActions,
-} from "@/lib/context/blog-post-store";
+} from "../../lib/context/blog-post-store";
 
 export default function LatestPost({ post }) {
     const images = useBlogPostImages();

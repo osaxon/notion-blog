@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
-import { getPostsByTag } from "@/utils/notion";
-import { getPostCoverImage, getPostSlug } from "@/lib/helpers";
+import { getPostsByTag } from "../../utils/notion";
+import { getPostCoverImage, getPostSlug } from "../../lib/helpers";
 
 export default async function FilteredPosts({ title, tag }) {
     const { posts } = await getPostsByTag(tag);

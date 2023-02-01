@@ -1,16 +1,8 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
-import {
-    getPostCoverImage,
-    getPostTitle,
-    getPostSlug,
-    getPostExcerpt,
-} from "@/lib/helpers";
 
 import { FeaturedCard } from "../Molecules";
 
-import clsx from "clsx";
 import React from "react";
 
 export default function FeaturedPosts({ posts }) {
