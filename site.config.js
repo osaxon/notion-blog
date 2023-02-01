@@ -1,5 +1,5 @@
 const siteConfig = {
-    name: "Oli's Travle Blog",
+    name: "ItchyFeet.com",
     navMenu: [
         {
             title: "Home",

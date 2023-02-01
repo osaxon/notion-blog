@@ -59,7 +59,7 @@ export default function Header() {
             >
                 <nav
                     className={clsx(
-                        "text-white layout items-center justify-between h-full text-xs leading-5 font-normal transition-colors duration-200 hidden md:flex",
+                        "text-base-content px-4 items-center justify-between h-full text-xs leading-5 font-normal transition-colors duration-200 hidden md:flex",
                         {
                             "group-hover:text-warning": isHome && !isScrolled,
                         }

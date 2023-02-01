@@ -6,6 +6,8 @@ import "prismjs/themes/prism-tomorrow.css";
 
 // used for rendering equations (optional)
 import "katex/dist/katex.min.css";
+import { Source_Code_Pro } from "@next/font/google";
+const sourceCodePro = Source_Code_Pro({ subsets: ["latin"] });
 
 import "../styles/index.css";
 
@@ -21,7 +23,7 @@ export default function RootLayout({ children }) {
       */}
             <head />
 
-            <body className="">
+            <body className={sourceCodePro.className}>
                 <Header />
                 <AppWrapper>{children}</AppWrapper>
             </body>

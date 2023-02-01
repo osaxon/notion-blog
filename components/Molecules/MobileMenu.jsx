@@ -17,7 +17,7 @@ export default function MobileMenu({ links }) {
                 leaveFrom="transform scale-100 opacity-100"
                 leaveTo="transform scale-95 opacity-0"
             >
-                <Menu.Items className="absolute left-0 z-10 w-48 origin-top-right rounded-sm bg-primary backdrop-blur-lg py-2 flex flex-col">
+                <Menu.Items className="absolute left-0 z-10 w-48 origin-top-right rounded-sm bg-white backdrop-blur-lg py-2 flex flex-col">
                     {links.length > 0 &&
                         links.map((l) => (
                             <Menu.Item key={l.title}>
