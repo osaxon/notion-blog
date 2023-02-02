@@ -56,7 +56,6 @@ export default async function handler(req, res) {
                 },
             });
             const userLikes = await getUserLikes({ sessionId, slug });
-            console.log(slug);
             return res.status(201).json({
                 views: response !== null ? response?._count.views : 0,
                 likes: response !== null ? response?._count.likes : 0,

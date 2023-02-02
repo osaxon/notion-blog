@@ -15,7 +15,7 @@ function useHeadings() {
                 level: Number(element.tagName.substring(1)),
             }));
         setHeadings(elements);
-        console.log(elements);
+        console.log(headings);
     }, []);
     return headings;
 }
@@ -24,7 +24,7 @@ const TableOfContents = () => {
     const headings = useHeadings();
     const activeId = useScrollSpy(
         headings.map(({ id }) => id),
-        { rootMargin: "0% 0% -25% 0%" }
+        { rootMargin: "0% 0% 50% 0%" }
     );
 
     return (
@@ -35,9 +35,9 @@ const TableOfContents = () => {
                     <li key={heading.id}>
                         <a
                             className={clsx(
-                                "font-medium text-primary-content text-lg",
+                                "font-medium text-primary text-lg",
                                 activeId === heading.id
-                                    ? "font-bold md:text-primary-focus sm:text-primary-content"
+                                    ? "font-bold text-success"
                                     : "font-normal",
                                 heading.level === 3 ? "ml-2 text-base" : ""
                             )}

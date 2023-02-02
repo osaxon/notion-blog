@@ -59,7 +59,6 @@ export const getSinglePost = cache(async (id) => {
             page_id: id,
         });
     } catch (error) {
-        console.log(error);
         return error;
     }
     return post;
@@ -88,6 +87,7 @@ export const getBlocks = cache(async (id) => {
 });
 
 export const getPageAndBlocks = cache(async (slug) => {
+    if (!slug) return null;
     const page = await getBySlug(slug);
     let blocks = await getBlocks(page.id);
     blocks = await Promise.all(

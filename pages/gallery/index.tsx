@@ -29,14 +29,6 @@ const Home: NextPage = ({ images }: { images: ImageProps[] }) => {
     <>
       <Head>
         <title>SE Asia Photos | Travel Blog</title>
-        <meta
-          property="og:image"
-          content=""
-        />
-        <meta
-          name="twitter:image"
-          content=""
-        />
       </Head>
       <main className="mx-auto max-w-[1960px] p-4">
         {photoId && (
@@ -90,7 +82,7 @@ export default Home
 export async function getStaticProps() {
   const results = await cloudinary.v2.search
     .expression(`folder:${process.env.CLOUDINARY_FOLDER}/*`)
-    .sort_by('public_id', 'desc')
+    .sort_by('uploaded_at', 'desc')
     .max_results(400)
     .execute()
   let reducedResults: ImageProps[] = []

@@ -1,6 +1,4 @@
-"use client";
 import Emoji from "../Atoms/Emoji";
-import { useState } from "react";
 import Image from "next/image";
 import ReadTime from "./ReadTime";
 import { format } from "date-fns";
@@ -10,8 +8,7 @@ function FormattedTime({ dt }) {
     return <span className="font-mono italic text-base-content">{time}</span>;
 }
 
-const PageCover = ({ page }) => {
-    const [imageDetails, setImageDetails] = useState();
+export default async function PageCover({ page }) {
     let imgUrl;
 
     if (page.cover) {
@@ -28,19 +25,9 @@ const PageCover = ({ page }) => {
             {page && page?.cover !== null ? (
                 <Image
                     alt="Cover image"
-                    width={800}
-                    height={
-                        imageDetails?.height ? 500 / imageDetails.height : 500
-                    }
+                    width={1280}
+                    height={720}
                     className="w-full h-[33vh] object-cover"
-                    onLoadingComplete={(e) => {
-                        setImageDetails({
-                            url: imgUrl,
-                            width: e.naturalWidth,
-                            height: e.naturalHeight,
-                            ratio: e.naturalWidth / e.naturalHeight,
-                        });
-                    }}
                     src={imgUrl}
                 />
             ) : null}
@@ -61,6 +48,4 @@ const PageCover = ({ page }) => {
             </div>
         </>
     );
-};
-
-export default PageCover;
+}

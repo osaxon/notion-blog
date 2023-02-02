@@ -1,5 +1,7 @@
 const siteConfig = {
-    name: "ItchyFeet.com",
+    title: "",
+    description: "A travel blog for inspiration for the adventurous",
+    name: "BAMBOOZE.COM",
     navMenu: [
         {
             title: "Home",

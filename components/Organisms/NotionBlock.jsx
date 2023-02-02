@@ -35,19 +35,19 @@ const NotionBlock = ({ block }) => {
         case BLOCK_TYPES.h1:
             // For a heading
             return (
-                <Heading as="h1" className="text-3xl font-bold mt-20">
+                <Heading as="h1" className="text-4xl font-bold mt-20">
                     {block[BLOCK_TYPES.h1].rich_text[0].plain_text}
                 </Heading>
             );
         case BLOCK_TYPES.h2:
             return (
-                <Heading as="h2" className="text-2xl font-bold py-4">
+                <Heading as="h2" className="text-3xl font-bold py-4">
                     {block[BLOCK_TYPES.h2].rich_text[0].plain_text}
                 </Heading>
             );
         case BLOCK_TYPES.h3:
             return (
-                <Heading as="h3" className="text-lg font-bold pt-3">
+                <Heading as="h3" className="text-xl font-bold pt-3">
                     {block[BLOCK_TYPES.h3].rich_text[0].plain_text}
                 </Heading>
             );
@@ -66,7 +66,6 @@ const NotionBlock = ({ block }) => {
                     ? block[BLOCK_TYPES.image].file.url
                     : null;
             let thisImage = images.filter((image) => image.url === imgUrl)[0];
-            console.log(thisImage);
             return (
                 <figure className="relative flex justify-center py-8">
                     <Image
@@ -74,7 +73,6 @@ const NotionBlock = ({ block }) => {
                         width={600}
                         height={thisImage?.ratio ? thisImage?.ratio * 600 : 600}
                         onLoadingComplete={(e) => {
-                            console.log(e);
                             addImage({
                                 url: imgUrl,
                                 width: e.naturalWidth,
@@ -105,7 +103,7 @@ const NotionBlock = ({ block }) => {
         case "bulleted_list_item":
             // For an unordered list
             return (
-                <li>
+                <li className="text-xl">
                     {
                         block[BLOCK_TYPES.bulletedListItem].rich_text[0]
                             .plain_text
@@ -127,15 +125,13 @@ const NotionBlock = ({ block }) => {
             );
 
         case BLOCK_TYPES.columnList:
-            console.log(block);
             return;
         case BLOCK_TYPES.column:
-            console.log(block);
             return;
         case BLOCK_TYPES.paragraph:
             // For a paragraph
             return (
-                <p>
+                <p className="text-xl">
                     {block[BLOCK_TYPES.paragraph].rich_text[0]?.text?.content}{" "}
                 </p>
             );

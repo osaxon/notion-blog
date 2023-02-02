@@ -35,7 +35,7 @@ const LikeButton = ({ slug }) => {
             >
                 <div
                     className={clsx(
-                        "bg-secondary w-10 group-hover:animate-pulse group-hover:animate-spin  transform-gpu h-10 bg-top transition-transform",
+                        "bg-secondary w-10 transform-gpu h-10 bg-top transition-transform",
                         userLikes === 0
                             ? "translate-y-8"
                             : userLikes === 1
@@ -48,8 +48,6 @@ const LikeButton = ({ slug }) => {
                             ? "translate-y-1"
                             : userLikes === 5
                             ? "translate-y-0"
-                            : mutateStatus === "loading"
-                            ? "animate-pulse"
                             : ""
                     )}
                 />

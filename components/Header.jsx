@@ -52,22 +52,23 @@ export default function Header() {
                 className={clsx(
                     "relative h-16 mx-auto transition-colors bg-transparent border-b border-transparent duration-200 group-hover:backdrop-blur-md",
                     {
-                        "!backdrop-blur-md bg-base-100 bg-opacity-25":
+                        "backdrop-blur-md bg-base-100 bg-opacity-50":
                             !isHome || isScrolled,
                     }
                 )}
             >
                 <nav
                     className={clsx(
-                        "text-base-content px-4 items-center justify-between h-full text-xs leading-5 font-normal transition-colors duration-200 hidden md:flex",
+                        "px-4 items-center justify-between h-full leading-5 font-bold transition-colors duration-200 hidden md:flex",
                         {
-                            "group-hover:text-warning": isHome && !isScrolled,
+                            "group-hover:text-primary text-base-100":
+                                isHome && !isScrolled,
                         }
                     )}
                 >
                     <div className="flex items-center h-full w-full justify-between">
                         <Link
-                            className="text-2xl leading-[36px] font-semibold uppercase"
+                            className="text-3xl leading-[36px] font-semibold uppercase"
                             href="/"
                         >
                             {siteConfig.name}
@@ -77,7 +78,7 @@ export default function Header() {
                                 navLinks.map((l) => (
                                     <li key={l.title}>
                                         <Link
-                                            className="text-xl hover:underline leading-[36px] font-semibold uppercase"
+                                            className="text-2xl leading-[36px] font-semibold uppercase"
                                             href={l.href}
                                         >
                                             {l.title}
