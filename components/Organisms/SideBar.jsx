@@ -12,7 +12,7 @@ const SideBar = () => {
         <div className="flex sticky top-20 flex-col w-full gap-20">
             <TableOfContents />
 
-            <div className="flex border flex-col gap-4">
+            <div className="flex flex-col gap-4">
                 <LikeButton slug={slug} />
                 <BuyMeACoffee />
             </div>
