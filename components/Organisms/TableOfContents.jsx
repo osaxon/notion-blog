@@ -28,7 +28,7 @@ const TableOfContents = () => {
     );
 
     return (
-        <nav className="hidden md:block">
+        <nav className="hidden lg:block">
             <p className="font-bold text-lg py-4">Contents:</p>
             <ul className="flex flex-col space-y-1">
                 {headings.map((heading) => (

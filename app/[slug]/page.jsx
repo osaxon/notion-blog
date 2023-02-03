@@ -1,5 +1,6 @@
 import React from "react";
 import { Suspense } from "react";
+import { ScreenSizes } from "../../components/Atoms/TailwindContainerSizes";
 import { PageCover } from "../../components/Molecules";
 import { getPageAndBlocks, getPosts } from "../../utils/notion";
 import { getPostSlug } from "../../lib/helpers";
@@ -15,8 +16,9 @@ export default async function Page({ params: { slug } }) {
         <Suspense fallback={<div>Loading...</div>}>
             <main className="relative">
                 <PageCover page={page} />
+                <ScreenSizes />
                 <ZoomedImage />
-                <article className="layout bg-white gap-x-px flex flex-col md:flex-row">
+                <article className="layout bg-white gap-x-px flex flex-col lg:flex-row">
                     <section className="px-4 flex-grow">
                         {blocks.map((block) => (
                             <React.Fragment key={block.id}>
@@ -25,7 +27,7 @@ export default async function Page({ params: { slug } }) {
                         ))}
                     </section>
 
-                    <aside className="flex-grow md:max-w-[250px] w-full px-4">
+                    <aside className="lg:max-w-[250px] w-full px-4">
                         <SideBar />
                     </aside>
                 </article>

@@ -59,7 +59,7 @@ export default function Header() {
             >
                 <nav
                     className={clsx(
-                        "px-4 items-center justify-between h-full leading-5 font-bold transition-colors duration-200 hidden md:flex",
+                        "px-4 items-center justify-between h-full leading-5 font-bold transition-colors duration-200 hidden lg:flex",
                         {
                             "group-hover:text-primary text-base-100":
                                 isHome && !isScrolled,
@@ -88,7 +88,7 @@ export default function Header() {
                         </ul>
                     </div>
                 </nav>
-                <nav className="flex items-center layout h-full md:hidden">
+                <nav className="flex items-center layout h-full lg:hidden">
                     <MobileMenu links={navLinks} />
                 </nav>
             </header>
