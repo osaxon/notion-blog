@@ -30,7 +30,7 @@ export default function LatestPost({ post }) {
             />
             <Link href={`/${getPostSlug(post)}`}>
                 <div className="layout relative h-full">
-                    <div className="absolute group hover:backdrop-blur-sm transition-all bottom-40 flex flex-col items-center lg:items-start gap-8 lg:w-2/3 w-full">
+                    <div className="absolute group transition-all lg:bottom-24 bottom-40 flex flex-col items-center lg:items-start gap-8 lg:w-2/3 w-full">
                         <h2 className="font-serif text-base-100 font-bold italic text-5xl lg:text-6xl mr-10">
                             Latest adventure...
                         </h2>

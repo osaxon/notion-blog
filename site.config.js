@@ -1,7 +1,7 @@
 const siteConfig = {
     title: "",
     description: "A travel blog for inspiration for the adventurous",
-    name: "BAMBOOZE.COM",
+    name: "O&G.com",
     navMenu: [
         {
             title: "Home",
