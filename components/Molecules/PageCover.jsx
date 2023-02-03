@@ -2,6 +2,10 @@ import Emoji from "../Atoms/Emoji";
 import Image from "next/image";
 import ReadTime from "./ReadTime";
 import { format } from "date-fns";
+import { getTags } from "../../lib/helpers";
+import Link from "next/link";
+import clsx from "clsx";
+import TagButton from "../Atoms/TagButton";
 
 function FormattedTime({ dt }) {
     const time = format(new Date(dt), "dd-MMM-yyyy");
@@ -19,6 +23,8 @@ export default async function PageCover({ page }) {
                 ? page?.cover.file.url
                 : null;
     }
+
+    const tags = getTags(page);
 
     return (
         <>
@@ -45,6 +51,16 @@ export default async function PageCover({ page }) {
                     <FormattedTime dt={page.properties.Created.created_time} />
                     <ReadTime />
                 </div>
+                <ul className="flex gap-2 items-center">
+                    {tags &&
+                        tags.map((tag) => {
+                            return (
+                                <li key={tag.id}>
+                                    <TagButton tag={tag} />
+                                </li>
+                            );
+                        })}
+                </ul>
             </div>
         </>
     );

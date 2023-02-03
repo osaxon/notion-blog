@@ -25,7 +25,7 @@ export default async function Page({ params: { slug } }) {
                         ))}
                     </section>
 
-                    <aside className="flex-grow md:max-w-[250px] w-full border px-4">
+                    <aside className="flex-grow md:max-w-[250px] w-full px-4">
                         <SideBar />
                     </aside>
                 </article>
