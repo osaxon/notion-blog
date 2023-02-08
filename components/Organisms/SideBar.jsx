@@ -1,22 +1,21 @@
 "use client";
 import React from "react";
-import TableOfContents from "./TableOfContents";
 import { LikeButton } from "../../components/Molecules";
 import { usePathname } from "next/navigation";
 import BuyMeACoffee from "../Atoms/BuyMeACoffee";
 
-const SideBar = () => {
+const SideBar = ({ tags }) => {
     const slug = usePathname().split("/")[1];
 
     return (
-        <div className="flex sticky top-20 flex-col w-full gap-20">
-            <TableOfContents />
-
-            <div className="flex flex-col gap-4">
-                <LikeButton slug={slug} />
-                <BuyMeACoffee />
+        <aside className="w-full border">
+            <div className="sticky top-20 flex w-full flex-col gap-20">
+                <div className="flex flex-col gap-4">
+                    <LikeButton tags={tags} slug={slug} />
+                    <BuyMeACoffee />
+                </div>
             </div>
-        </div>
+        </aside>
     );
 };
 1;

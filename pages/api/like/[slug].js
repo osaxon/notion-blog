@@ -11,9 +11,9 @@ export default async function handler(req, res) {
     }
 
     try {
-        const userLikes = getUserLikes({ sessionId, slug });
+        const userLikes = await getUserLikes({ sessionId, slug });
 
-        if (userLikes >= 5) throw new Error("Max like count is 5");
+        if (userLikes >= 8) throw new Error("Max like count is 8");
 
         const response = await prisma.contentMeta.upsert({
             where: {

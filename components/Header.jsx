@@ -44,7 +44,7 @@ export default function Header() {
 
     return (
         <div
-            className={clsx("sticky top-0 inset-x-0 z-50 group", {
+            className={clsx("top-0 inset-x-0 z-50 group", {
                 "!fixed": isHome,
             })}
         >

@@ -1,61 +1,56 @@
 "use client";
-import Emoji from "../../components/Atoms/Emoji";
+import {
+    TwitterShareButton,
+    TwitterIcon,
+    EmailShareButton,
+    EmailIcon,
+} from "react-share";
+import { motion, transform, AnimatePresence } from "framer-motion";
 import useContentMeta from "../../hooks/useContentMeta";
-import { useState } from "react";
-import clsx from "clsx";
+import { useEffect } from "react";
 
-const LikeButton = ({ slug }) => {
+const LikeButton = ({ slug, tags }) => {
     const { likes, addLike, mutateStatus, userLikes } = useContentMeta(slug);
-    const [animate, setAnimate] = useState(false);
+    const heartFill = transform([0, 8], ["10%", "100%"])(likes);
 
-    function handleClick() {
-        addLike();
-        if (userLikes >= 4) {
-            setAnimate(true);
-            setTimeout(() => {
-                setAnimate(false);
-            }, 2500);
-        }
-    }
+    useEffect(() => console.log(tags));
 
     return (
-        <div className="flex relative flex-col items-center gap-y-2">
-            <Emoji
-                className={clsx(
-                    "animate-bounce -z-50 text-xl -top-2 absolute",
-                    animate ? "block" : "hidden"
-                )}
-                symbol="😻"
-            />
-
-            <button
-                disabled={userLikes >= 5}
-                onClick={() => handleClick()}
-                className="bg-error scale-[2] origin-top-left clip-path-heart group -translate-x-1"
+        <div className="flex items-start justify-center gap-2 py-6">
+            <motion.button
+                disabled={likes >= 8}
+                onClick={() => addLike()}
+                className="clip-path-heart relative flex h-11 w-14 justify-center bg-warning"
             >
-                <div
-                    className={clsx(
-                        "bg-secondary w-10 transform-gpu h-10 bg-top transition-transform",
-                        userLikes === 0
-                            ? "translate-y-8"
-                            : userLikes === 1
-                            ? "translate-y-4"
-                            : userLikes === 2
-                            ? "translate-y-3"
-                            : userLikes === 3
-                            ? "translate-y-2"
-                            : userLikes === 4
-                            ? "translate-y-1"
-                            : userLikes === 5
-                            ? "translate-y-0"
-                            : ""
+                <AnimatePresence>
+                    {mutateStatus === "loading" && (
+                        <motion.div
+                            initial={{ opacity: 1 }}
+                            animate={{ opacity: 0, translateY: -30 }}
+                            transition={{ ease: "easeOut", duration: 2 }}
+                            className=" text-center font-mono text-xs italic text-success-content opacity-70"
+                        >
+                            <p>+1</p>
+                        </motion.div>
                     )}
-                />
-            </button>
+                </AnimatePresence>
 
-            <span className="font-mono select-none opacity-40 text-base-content">
-                {likes}
-            </span>
+                <motion.div
+                    animate={{ height: heartFill }}
+                    className="absolute bottom-0 -z-50 w-full bg-success"
+                />
+            </motion.button>
+            <TwitterShareButton
+                url={`${process.env.NEXT_PUBLIC_URL}/${slug}`}
+                quote={`Check out this article`}
+                hashtags={tags}
+                className="rounded-full"
+            >
+                <TwitterIcon className="h-11 w-11 rounded-full" />
+            </TwitterShareButton>
+            <EmailShareButton url={`${process.env.NEXT_PUBLIC_URL}/${slug}`}>
+                <EmailIcon className="h-11 w-11 rounded-full" />
+            </EmailShareButton>
         </div>
     );
 };

@@ -35,19 +35,22 @@ const NotionBlock = ({ block }) => {
         case BLOCK_TYPES.h1:
             // For a heading
             return (
-                <Heading as="h1" className="text-4xl font-bold mt-20">
+                <Heading as="h1" className="mt-20 text-4xl font-bold">
                     {block[BLOCK_TYPES.h1].rich_text[0].plain_text}
                 </Heading>
             );
         case BLOCK_TYPES.h2:
             return (
-                <Heading as="h2" className="text-3xl font-bold py-4">
+                <Heading
+                    as="h2"
+                    className="py-4 text-center text-3xl font-bold"
+                >
                     {block[BLOCK_TYPES.h2].rich_text[0].plain_text}
                 </Heading>
             );
         case BLOCK_TYPES.h3:
             return (
-                <Heading as="h3" className="text-xl font-bold pt-3">
+                <Heading as="h3" className="pt-3 text-center text-xl font-bold">
                     {block[BLOCK_TYPES.h3].rich_text[0].plain_text}
                 </Heading>
             );
@@ -88,14 +91,7 @@ const NotionBlock = ({ block }) => {
                                 zoomed: false,
                             });
                         }}
-                        onClick={() => {
-                            setZoomedImg(imgUrl);
-                            toggleZoom();
-                        }}
-                        className={clsx(
-                            "object-cover h-auto",
-                            !isZoomed ? "cursor-zoom-in" : ""
-                        )}
+                        className={clsx("h-auto object-cover")}
                         src={imgUrl}
                     />
                 </figure>
@@ -113,7 +109,7 @@ const NotionBlock = ({ block }) => {
                               .filter((item, i) => item.href !== null)
                               .map((item, i) => (
                                   <Link
-                                      className="link link-primary"
+                                      className="link-primary link"
                                       key={i}
                                       href={item.href}
                                   >
@@ -131,7 +127,7 @@ const NotionBlock = ({ block }) => {
         case BLOCK_TYPES.paragraph:
             // For a paragraph
             return (
-                <p className="text-xl">
+                <p className="text-justify text-xl">
                     {block[BLOCK_TYPES.paragraph].rich_text[0]?.text?.content}{" "}
                 </p>
             );
@@ -140,13 +136,13 @@ const NotionBlock = ({ block }) => {
             const itemCount = richText.length;
             const emoji = block[BLOCK_TYPES.callout].icon.emoji || null;
             return (
-                <span className="bg-primary text-primary-content p-4 inline-flex gap-2">
+                <span className="inline-flex gap-2 bg-primary p-4 text-primary-content">
                     {emoji && <Emoji symbol={emoji} />}
                     {richText.map((item, index) => {
                         if (item.href !== null) {
                             return (
                                 <Link
-                                    className="hover:italic link"
+                                    className="link hover:italic"
                                     key={index}
                                     href={item.href}
                                 >

@@ -1,25 +1,27 @@
 import React from "react";
 import { Suspense } from "react";
+import ScrollProgress from "../../components/Atoms/ScrollProgress";
 import { ScreenSizes } from "../../components/Atoms/TailwindContainerSizes";
 import { PageCover } from "../../components/Molecules";
 import { getPageAndBlocks, getPosts } from "../../utils/notion";
-import { getPostSlug } from "../../lib/helpers";
+import { getPostSlug, getTags } from "../../lib/helpers";
 import SideBar from "../../components/Organisms/SideBar";
-import ZoomedImage from "../../components/Molecules/ZoomedImage";
 import NotionBlock from "../../components/Organisms/NotionBlock";
 
 export default async function Page({ params: { slug } }) {
     const _blocks = getPageAndBlocks(slug);
     const { page, blocks } = await _blocks;
+    const tags = getTags(page).map((t) => t.name);
 
     return (
         <Suspense fallback={<div>Loading...</div>}>
             <main className="relative">
+                <ScrollProgress />
+
                 <PageCover page={page} />
-                <ScreenSizes />
-                <ZoomedImage />
-                <article className="layout bg-white gap-x-px flex flex-col lg:flex-row">
-                    <section className="px-4 flex-grow">
+
+                <article className="layout relative flex flex-col justify-between gap-4 border lg:flex-row">
+                    <section className="max-w-5xl p-2">
                         {blocks.map((block) => (
                             <React.Fragment key={block.id}>
                                 <NotionBlock block={block} />
@@ -27,9 +29,7 @@ export default async function Page({ params: { slug } }) {
                         ))}
                     </section>
 
-                    <aside className="lg:max-w-[250px] w-full px-4">
-                        <SideBar />
-                    </aside>
+                    <SideBar tags={tags} />
                 </article>
             </main>
         </Suspense>
