@@ -73,7 +73,7 @@ const NotionBlock = ({ block }) => {
                 <figure className="relative flex justify-center py-8">
                     <Image
                         alt="Cover image"
-                        width={600}
+                        width={900}
                         height={thisImage?.ratio ? thisImage?.ratio * 600 : 600}
                         onLoadingComplete={(e) => {
                             addImage({
