@@ -20,7 +20,7 @@ export default async function Page({ params: { slug } }) {
 
                 <PageCover page={page} />
 
-                <article className="layout relative flex flex-col justify-between gap-4 border lg:flex-row">
+                <article className="layout relative flex flex-col justify-between gap-4 md:flex-row">
                     <section className="max-w-5xl p-2">
                         {blocks.map((block) => (
                             <React.Fragment key={block.id}>

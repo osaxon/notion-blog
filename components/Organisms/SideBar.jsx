@@ -9,7 +9,7 @@ const SideBar = ({ tags }) => {
     const slug = usePathname().split("/")[1];
 
     return (
-        <aside className="w-full min-w-[200px] lg:max-w-xs">
+        <aside className="w-full min-w-[200px] md:max-w-xs">
             <div className="sticky top-20 flex w-full flex-col gap-20">
                 <div className="flex flex-col items-center gap-4">
                     <LikeButton tags={tags} slug={slug} />

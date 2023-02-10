@@ -1,11 +1,18 @@
 "use client";
 import Link from "next/link";
+import Donut from "./Icons/Donut";
 import { AnimatePresence, motion, useCycle } from "framer-motion";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { FiMenu } from "react-icons/fi";
 import siteConfig from "../site.config";
+import { Fredericka_the_Great } from "@next/font/google";
+
+const fredrickaTheGreat = Fredericka_the_Great({
+    subsets: ["latin"],
+    weight: "400",
+});
 
 const navLinks = siteConfig.navMenu;
 
@@ -55,16 +62,15 @@ export default function Header() {
         >
             <header
                 className={clsx(
-                    "relative mx-auto h-16 border-b border-transparent bg-transparent transition-colors duration-200 group-hover:backdrop-blur-md",
+                    "relative mx-auto h-16 border-b border-transparent bg-transparent transition-colors duration-200 group-hover:bg-base-100",
                     {
-                        "bg-base-100 bg-opacity-50 backdrop-blur-md":
-                            !isHome || isScrolled,
+                        "bg-base-100": !isHome || isScrolled,
                     }
                 )}
             >
                 <nav
                     className={clsx(
-                        "hidden h-full items-center justify-between px-4 font-bold leading-5 transition-colors duration-200 lg:flex",
+                        "hidden h-full items-center justify-between px-4 font-bold leading-5 transition-colors duration-200 md:flex",
                         {
                             "text-base-100 group-hover:text-primary":
                                 isHome && !isScrolled,
@@ -73,10 +79,15 @@ export default function Header() {
                 >
                     <div className="flex h-full w-full items-center justify-between">
                         <Link
-                            className="text-3xl font-semibold uppercase leading-[36px]"
+                            className="flex items-center gap-2 text-4xl font-semibold uppercase leading-[36px] tracking-wider"
                             href="/"
                         >
-                            {siteConfig.name}
+                            <motion.div whileHover={{ rotate: 60 }}>
+                                <Donut className="fill-warning stroke-primary" />
+                            </motion.div>
+                            <span className={fredrickaTheGreat.className}>
+                                {siteConfig.name}
+                            </span>
                         </Link>
                         <ul className="flex gap-x-4">
                             {navLinks.length > 0 &&
@@ -93,20 +104,17 @@ export default function Header() {
                         </ul>
                     </div>
                 </nav>
-
-                {/* <nav className="layout flex h-full items-center lg:hidden">
-                    <MobileMenu links={navLinks} />
-                </nav> */}
-                <div className="p-3 lg:hidden">
+                <div className="flex h-16 items-center px-4 md:hidden">
                     <button onClick={cycleOpen}>
-                        <FiMenu size={28} />
+                        <motion.div whileHover={{ rotate: 60 }}>
+                            <Donut className="fill-warning stroke-primary" />
+                        </motion.div>
                     </button>
                 </div>
-
                 <AnimatePresence>
                     {open && (
                         <motion.aside
-                            className="absolute top-0 z-50 my-10 h-screen min-h-full bg-base-100"
+                            className="h-screen min-h-full bg-base-100"
                             initial={{ width: 0 }}
                             animate={{
                                 width: "calc(66vw)",
