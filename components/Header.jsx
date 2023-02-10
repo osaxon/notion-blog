@@ -4,11 +4,7 @@ import { AnimatePresence, motion, useCycle } from "framer-motion";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import {
-    useMobileMenu,
-    useMobileMenuActions,
-} from "../lib/context/mobile-menu-store";
-import MobileMenu from "./Molecules/MobileMenu";
+import { FiMenu } from "react-icons/fi";
 import siteConfig from "../site.config";
 
 const navLinks = siteConfig.navMenu;
@@ -101,16 +97,16 @@ export default function Header() {
                 {/* <nav className="layout flex h-full items-center lg:hidden">
                     <MobileMenu links={navLinks} />
                 </nav> */}
-                <div className="lg:hidden">
+                <div className="p-3 lg:hidden">
                     <button onClick={cycleOpen}>
-                        {open ? "Close" : "Open"}
+                        <FiMenu size={28} />
                     </button>
                 </div>
 
                 <AnimatePresence>
                     {open && (
                         <motion.aside
-                            className="relative z-50 my-10 h-screen min-h-full bg-info"
+                            className="absolute top-0 z-50 my-10 h-screen min-h-full bg-base-100"
                             initial={{ width: 0 }}
                             animate={{
                                 width: "calc(66vw)",
@@ -124,7 +120,7 @@ export default function Header() {
                             }}
                         >
                             <motion.div
-                                className=""
+                                className="flex flex-col gap-6 p-3 text-3xl font-bold"
                                 initial="closed"
                                 animate="open"
                                 exit="closed"
@@ -133,7 +129,6 @@ export default function Header() {
                                     <motion.a
                                         key={id}
                                         href={href}
-                                        whileHover={{ scale: 1.1 }}
                                         variants={itemVariants}
                                     >
                                         {title}
