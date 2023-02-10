@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { AnimatePresence, motion, useCycle } from "framer-motion";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -12,12 +13,20 @@ import siteConfig from "../site.config";
 
 const navLinks = siteConfig.navMenu;
 
+const itemVariants = {
+    closed: {
+        opacity: 0,
+    },
+    open: {
+        opacity: 1,
+    },
+};
+
 export default function Header() {
+    const [open, cycleOpen] = useCycle(false, true);
     const pathname = usePathname();
     const [isHome, setIsHome] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
-    const isOpen = useMobileMenu();
-    const { toggle, open, close } = useMobileMenuActions();
 
     //useEffect that detects if window is scrolled > 5px on the Y axis
     useEffect(() => {
@@ -44,31 +53,31 @@ export default function Header() {
 
     return (
         <div
-            className={clsx("top-0 inset-x-0 z-50 group", {
+            className={clsx("group relative inset-x-0 top-0 z-50", {
                 "!fixed": isHome,
             })}
         >
             <header
                 className={clsx(
-                    "relative h-16 mx-auto transition-colors bg-transparent border-b border-transparent duration-200 group-hover:backdrop-blur-md",
+                    "relative mx-auto h-16 border-b border-transparent bg-transparent transition-colors duration-200 group-hover:backdrop-blur-md",
                     {
-                        "backdrop-blur-md bg-base-100 bg-opacity-50":
+                        "bg-base-100 bg-opacity-50 backdrop-blur-md":
                             !isHome || isScrolled,
                     }
                 )}
             >
                 <nav
                     className={clsx(
-                        "px-4 items-center justify-between h-full leading-5 font-bold transition-colors duration-200 hidden lg:flex",
+                        "hidden h-full items-center justify-between px-4 font-bold leading-5 transition-colors duration-200 lg:flex",
                         {
-                            "group-hover:text-primary text-base-100":
+                            "text-base-100 group-hover:text-primary":
                                 isHome && !isScrolled,
                         }
                     )}
                 >
-                    <div className="flex items-center h-full w-full justify-between">
+                    <div className="flex h-full w-full items-center justify-between">
                         <Link
-                            className="text-3xl leading-[36px] font-semibold uppercase"
+                            className="text-3xl font-semibold uppercase leading-[36px]"
                             href="/"
                         >
                             {siteConfig.name}
@@ -78,7 +87,7 @@ export default function Header() {
                                 navLinks.map((l) => (
                                     <li key={l.title}>
                                         <Link
-                                            className="text-2xl leading-[36px] font-semibold uppercase"
+                                            className="text-2xl font-semibold uppercase leading-[36px]"
                                             href={l.href}
                                         >
                                             {l.title}
@@ -88,9 +97,52 @@ export default function Header() {
                         </ul>
                     </div>
                 </nav>
-                <nav className="flex items-center layout h-full lg:hidden">
+
+                {/* <nav className="layout flex h-full items-center lg:hidden">
                     <MobileMenu links={navLinks} />
-                </nav>
+                </nav> */}
+                <div className="lg:hidden">
+                    <button onClick={cycleOpen}>
+                        {open ? "Close" : "Open"}
+                    </button>
+                </div>
+
+                <AnimatePresence>
+                    {open && (
+                        <motion.aside
+                            className="relative z-50 my-10 h-screen min-h-full bg-info"
+                            initial={{ width: 0 }}
+                            animate={{
+                                width: "calc(66vw)",
+                            }}
+                            exit={{
+                                width: 0,
+                                transition: { delay: 0.2, duration: 0.2 },
+                            }}
+                            transition={{
+                                type: "spring",
+                            }}
+                        >
+                            <motion.div
+                                className=""
+                                initial="closed"
+                                animate="open"
+                                exit="closed"
+                            >
+                                {navLinks.map(({ title, href, id }) => (
+                                    <motion.a
+                                        key={id}
+                                        href={href}
+                                        whileHover={{ scale: 1.1 }}
+                                        variants={itemVariants}
+                                    >
+                                        {title}
+                                    </motion.a>
+                                ))}
+                            </motion.div>
+                        </motion.aside>
+                    )}
+                </AnimatePresence>
             </header>
         </div>
     );

@@ -3,12 +3,7 @@ import Image from "next/image";
 
 const BuyMeACoffee = () => {
     return (
-        <a
-            target="_blank"
-            rel="noreferrer"
-            href="https://www.buymeacoffee.com/oliandgio"
-            className="inline-flex bg-[#FF813F] text-[#FFFFFF] hover:shadow-md rounded-md px-3 py-2 h-12"
-        >
+        <button className="btn flex w-full max-w-xs items-center justify-center border-0 bg-[#FF813F] text-[#FFFFFF] hover:bg-[#FF813F] hover:bg-opacity-80">
             <Image
                 alt="Buy me a coffee logo image"
                 src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg"
@@ -16,10 +11,17 @@ const BuyMeACoffee = () => {
                 height={24}
                 className="align-middle"
             />
-            <span className="ml-1 inline-flex items-center text-sm font-bold align-middle">
-                Buy me a Beer!
-            </span>
-        </a>
+            <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://www.buymeacoffee.com/oliandgio"
+                className=""
+            >
+                <span className="ml-1 inline-flex items-center align-middle text-sm font-bold">
+                    Buy me a Beer!
+                </span>
+            </a>
+        </button>
     );
 };
 

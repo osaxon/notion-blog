@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import NewsletterForm from "../Molecules/NewsletterForm";
 import { LikeButton } from "../../components/Molecules";
 import { usePathname } from "next/navigation";
 import BuyMeACoffee from "../Atoms/BuyMeACoffee";
@@ -8,11 +9,11 @@ const SideBar = ({ tags }) => {
     const slug = usePathname().split("/")[1];
 
     return (
-        <aside className="w-full border">
+        <aside className="w-full">
             <div className="sticky top-20 flex w-full flex-col gap-20">
                 <div className="flex flex-col gap-4">
                     <LikeButton tags={tags} slug={slug} />
-                    <BuyMeACoffee />
+                    <NewsletterForm />
                 </div>
             </div>
         </aside>

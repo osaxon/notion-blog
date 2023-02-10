@@ -27,31 +27,31 @@ export default async function PageCover({ page }) {
     const tags = getTags(page);
 
     return (
-        <>
+        <div className="-z-50">
             {page && page?.cover !== null ? (
                 <Image
                     alt="Cover image"
                     width={1280}
                     height={720}
-                    className="w-full h-[33vh] object-cover"
+                    className="-z-[99] h-[33vh] w-full object-cover"
                     src={imgUrl}
                 />
             ) : null}
-            <div className="flex relative items-center justify-center flex-col gap-2 py-8">
+            <div className="relative flex flex-col items-center justify-center gap-2 py-8">
                 {page?.icon !== null ? (
                     <Emoji
                         className="absolute -top-12 text-[4rem]"
                         symbol={page?.icon.emoji}
                     />
                 ) : null}
-                <h1 className="md:text-4xl text-2xl font-bold">
+                <h1 className="text-2xl font-bold md:text-4xl">
                     {page?.properties.Name.title[0].text.content}
                 </h1>
-                <div className="flex gap-2 items-center">
+                <div className="flex items-center gap-2">
                     <FormattedTime dt={page.properties.Created.created_time} />
                     <ReadTime />
                 </div>
-                <ul className="flex gap-2 items-center">
+                <ul className="flex items-center gap-2">
                     {tags &&
                         tags.map((tag) => {
                             return (
@@ -62,6 +62,6 @@ export default async function PageCover({ page }) {
                         })}
                 </ul>
             </div>
-        </>
+        </div>
     );
 }
