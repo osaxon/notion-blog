@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const BuyMeACoffee = () => {
     return (
-        <button className="btn flex w-full max-w-xs items-center justify-center border-0 bg-[#FF813F] text-[#FFFFFF] hover:bg-[#FF813F] hover:bg-opacity-80">
+        <button className="btn w-full border-0 bg-[#FF813F] text-[#FFFFFF] hover:bg-[#FF813F] hover:bg-opacity-80">
             <Image
                 alt="Buy me a coffee logo image"
                 src="https://cdn.buymeacoffee.com/buttons/bmc-new-btn-logo.svg"
