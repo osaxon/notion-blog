@@ -11,6 +11,7 @@ client.setConfig({
 
 export default async function handler(req, res) {
     const { email } = req.body;
+    console.log(email);
     if (!email) {
         return res.status(400).json({ error: "Email required" });
     }
@@ -26,7 +27,7 @@ export default async function handler(req, res) {
         return res.status(201).json(response);
     } catch (error) {
         error = JSON.parse(error.response.text);
-        console.log(error);
+        console.error(error);
         return res.status(error.status).json({ error: error });
     }
 }
