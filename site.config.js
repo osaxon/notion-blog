@@ -2,6 +2,7 @@ const siteConfig = {
     title: "WebJenga Travel",
     description: "A travel blog for inspiration for the adventurous",
     name: "WebJenga.com",
+    url: "https://www.webjenga.com",
     navMenu: [
         {
             id: 1,

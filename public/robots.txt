@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://webjenga.com.com
+
+# Sitemaps
+Sitemap: https://webjenga.com.com/sitemap.xml
+Sitemap: https//webjenga.com/server-sitemap-index.xml
