@@ -1,14 +1,6 @@
+import SEO from "./SEO";
 import siteConfig from "../site.config";
 
 export default function Head() {
-    return (
-        <>
-            <title>{siteConfig.title}</title>
-            <meta
-                content="width=device-width, initial-scale=1"
-                name="viewport"
-            />
-            <meta name="description" content={siteConfig.description} />
-        </>
-    );
+    return <SEO title={siteConfig.title} />;
 }

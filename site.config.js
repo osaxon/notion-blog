@@ -1,8 +1,14 @@
 const siteConfig = {
+    // Site meta
     title: "WebJenga Travel",
     description: "A travel blog for inspiration for the adventurous",
     name: "WebJenga.com",
     url: "https://www.webjenga.com",
+    type: "website",
+    robots: "follow index",
+    image: "",
+
+    // site config
     navMenu: [
         {
             id: 1,

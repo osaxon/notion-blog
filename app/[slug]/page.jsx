@@ -1,7 +1,6 @@
 import React from "react";
 import { Suspense } from "react";
 import ScrollProgress from "../../components/Atoms/ScrollProgress";
-import { ScreenSizes } from "../../components/Atoms/TailwindContainerSizes";
 import { PageCover } from "../../components/Molecules";
 import { getPageAndBlocks, getPosts } from "../../utils/notion";
 import { getPostSlug, getTags } from "../../lib/helpers";

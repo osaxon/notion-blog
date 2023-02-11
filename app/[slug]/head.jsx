@@ -1,11 +1,5 @@
+import SEO from "../SEO";
+
 export default function Head({ params: { slug } }) {
-    return (
-        <>
-            <title>{slug}</title>
-            <meta
-                content="width=device-width, initial-scale=1"
-                name="viewport"
-            />
-        </>
-    );
+    return <SEO title={slug} postPage={true} />;
 }
