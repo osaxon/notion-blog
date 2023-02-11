@@ -104,12 +104,17 @@ export default function Header() {
                         </ul>
                     </div>
                 </nav>
-                <div className="flex h-16 items-center px-4 md:hidden">
+                <div className="flex h-16 items-center justify-between px-4 md:hidden">
                     <button onClick={cycleOpen}>
                         <motion.div whileHover={{ rotate: 60 }}>
                             <Donut className="fill-warning stroke-primary" />
                         </motion.div>
                     </button>
+                    <div className="w-full text-center text-4xl">
+                        <span className={fredrickaTheGreat.className}>
+                            {siteConfig.name}
+                        </span>
+                    </div>
                 </div>
                 <AnimatePresence>
                     {open && (
