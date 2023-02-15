@@ -1,4 +1,4 @@
-import { getFeaturedPosts, getWeeklyRoundup } from "../../../utils/notion";
+import { getWeeklyRoundup } from "../../../utils/notion";
 import { format } from "date-fns";
 import {
     getPostExcerpt,
@@ -10,6 +10,12 @@ import {
 export default async function handler(req, res) {
     if (req.method !== "GET") {
         return res.status(405).json(`${req.method} not allowed.`);
+    }
+
+    const { api_key } = req.query;
+
+    if (api_key !== process.env.ZAPIER_API_KEY) {
+        return res.status(400).json({ message: "Not authorised." });
     }
 
     try {
