@@ -11,14 +11,11 @@ export default async function handler(req, res) {
     if (req.method !== "GET") {
         return res.status(405).json(`${req.method} not allowed.`);
     }
-    console.log(req.query);
     const { api_key } = req.query;
 
     if (api_key !== process.env.MY_API_KEY) {
-        console.log("unauthorised attempt");
-        return res.status(400).json({ message: "Not authorised." });
+        return res.status(401).json({ message: "Not authorised." });
     } else {
-        console.log("authorised");
         try {
             let { posts } = await getWeeklyRoundup({ limit: 5 });
             posts = posts.map((post) => {

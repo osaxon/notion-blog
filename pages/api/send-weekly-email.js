@@ -1,16 +1,19 @@
 import sendgrid from "@sendgrid/mail";
 import apiClient from "../../lib/axios";
 
-async function sendEmail(req, res) {
+export default async function handler(req, res) {
     try {
-        const contacts = await apiClient.get(
-            `https://emailoctopus.com/api/1.6/lists/${process.env.EMAIL_OCTOPUS_LIST_ID}/contacts`,
+        const { data } = await apiClient.get(
+            `https://emailoctopus.com/api/1.6/lists/${process.env.EMAIL_OCTOPUS_LIST_ID}/contacts/subscribed`,
             {
-                api_key: "6130733f-8b8e-4482-b786-6971bfbe335c",
-                limit: 200,
+                params: {
+                    api_key: process.env.EMAIL_OCTOPUS_API_KEY,
+                    limit: 50,
+                    page: 1,
+                },
             }
         );
-        res.status(200).json(contacts);
+        res.status(200).json(data);
         //     await sendgrid.send({
         //         to: "oliverrsaxon@gmail.com", // Your email where you'll receive emails
         //         from: "oliverrsaxon@gmail.com", // your website email address here
@@ -36,13 +39,16 @@ async function sendEmail(req, res) {
         //   </html>`,
         //     });
     } catch (error) {
-        // console.log(error);
-        return res
-            .status(error.statusCode || 500)
-            .json({ error: error.response.data.error });
+        if (error.response) {
+            return res
+                .status(error.response.status || 500)
+                .json(error.response.data.error);
+        } else if (error.request) {
+            console.error(error.request);
+            return res.status(500).json(error);
+        } else {
+            console.error(error.message);
+            return res.status(500).json({ message: error.message });
+        }
     }
-
-    return res.status(200).json({ error: "" });
 }
-
-export default sendEmail;
