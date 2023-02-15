@@ -31,6 +31,20 @@ export const getPlaces = cache(async (startCursor = undefined) => {
     return { places, next_cursor, has_more, page };
 });
 
+export const getWeeklyRoundup = cache(async ({ limit = 5 }) => {
+    const { results: posts } = await client.databases.query({
+        database_id: POSTS_DB,
+        page_size: limit,
+        filter: {
+            timestamp: "created_time",
+            created_time: {
+                past_week: {},
+            },
+        },
+    });
+    return { posts };
+});
+
 export const getFeaturedPosts = cache(async ({ limit = 5 }) => {
     const { results: posts } = await client.databases.query({
         database_id: POSTS_DB,

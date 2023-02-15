@@ -16,6 +16,7 @@
     "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.13",
     "@mailchimp/mailchimp_marketing": "^3.0.80",
+    "@mailchimp/mailchimp_transactional": "^1.0.50",
     "@next/font": "^13.1.2",
     "@notionhq/client": "^2.2.3",
     "@prisma/client": "^4.8.1",
