@@ -1,24 +1,13 @@
-import client from "@mailchimp/mailchimp_marketing";
 import apiClient from "../../lib/axios";
-
-const AUDIENCE_ID = process.env.MAILCHIMP_AUDIENCE_ID;
-const API_KEY = process.env.MAILCHIMP_API_KEY;
-const DATACENTER = process.env.MAILCHIMP_API_SERVER;
-
-client.setConfig({
-    apiKey: API_KEY,
-    server: DATACENTER,
-});
 
 export default async function handler(req, res) {
     const { email } = req.body;
-    console.log(email);
 
     if (!email) {
-        return res.status(400).json({ error: "Email required" });
+        return res.status(405).json({ error: "Email required" });
     }
     if (req.method !== "POST") {
-        return res.status(400).json({ error: `${req.method} not allowed` });
+        return res.status(405).json({ error: `${req.method} not allowed` });
     }
 
     try {
@@ -30,21 +19,20 @@ export default async function handler(req, res) {
                 status: "SUBSCRIBED",
             }
         );
-        return res.status(200).json(response);
+        if (response.data) {
+            return res.status(200).json(response.data);
+        }
     } catch (error) {
-        console.error(error);
-        return res.status(500).json(error.response.data);
+        if (error.response) {
+            return res
+                .status(error.response.status || 500)
+                .json(error.response.data.error);
+        } else if (error.request) {
+            console.error(error.request);
+            return res.status(500).json(error);
+        } else {
+            console.error(error.message);
+            return res.status(500).json({ message: error.message });
+        }
     }
-
-    // try {
-    //     const response = await client.lists.addListMember(AUDIENCE_ID, {
-    //         email_address: email,
-    //         status: "subscribed",
-    //     });
-    //     return res.status(201).json(response);
-    // } catch (error) {
-    //     error = JSON.parse(error.response.text);
-    //     console.error(error);
-    //     return res.status(error.status).json({ error: error });
-    // }
 }
