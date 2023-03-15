@@ -7,7 +7,7 @@ async function getLatestPhotos() {
         .expression(`folder:${process.env.CLOUDINARY_FOLDER}/*`)
         .sort_by("uploaded_at", "desc")
         .with_field("metadata")
-        .max_results(8)
+        .max_results(6)
         .execute();
     let reducedResults = [];
 
@@ -31,14 +31,13 @@ async function getLatestPhotos() {
 
 export default async function LatestPhotos({ image }) {
     const { images } = await getLatestPhotos();
-    console.log(images);
     return (
-        <section className="layout py-3 @container h-full flex flex-col items-start">
-            <h2 className="text-4xl font-bold bg-primary text-base-100 mb-2">
+        <section className="layout flex h-full flex-col items-start py-3 @container">
+            <h2 className="mb-2 bg-primary text-4xl font-bold text-base-100">
                 {"/// Latest Photos"}
                 {image ?? <>{image}</>}
             </h2>
-            <ul className="columns-1 @xl:columns-2 gap-3 w-full">
+            <ul className="w-full columns-1 gap-3 @xl:columns-2">
                 {images &&
                     images.map((image) => {
                         return (
@@ -60,7 +59,7 @@ export default async function LatestPhotos({ image }) {
                     })}
 
                 <Link
-                    className="h-full border bg-primary text-primary-content text-3xl font-bold"
+                    className="h-full border bg-primary text-3xl font-bold text-primary-content"
                     href="/gallery"
                 >
                     View More...

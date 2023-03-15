@@ -7,37 +7,35 @@ import {
     getPostSlug,
     getPostExcerpt,
 } from "../../lib/helpers";
-import {
-    useBlogPostImages,
-    useBlogPostActions,
-} from "../../lib/context/blog-post-store";
+// import {
+//     useBlogPostImages,
+//     useBlogPostActions,
+// } from "../../lib/context/blog-post-store";
 
 export default function LatestPost({ post }) {
-    const images = useBlogPostImages();
-    const { addImage } = useBlogPostActions();
-    const thisImage = images.filter(
-        (image) => image.url === getPostCoverImage(post)
-    )[0];
+    // const images = useBlogPostImages();
+    // const { addImage } = useBlogPostActions();
+    // const thisImage = images.filter(
+    //     (image) => image.url === getPostCoverImage(post)
+    // )[0];
 
     return (
-        <section className="w-full relative h-[70vh]">
+        <section className="relative h-[70vh] w-full">
             <Image
                 alt="Cover image"
                 width={1280}
                 height={720}
-                className="object-cover absolute w-full h-full"
+                className="absolute h-full w-full object-cover"
                 src={getPostCoverImage(post)}
+                priority={true}
             />
             <Link href={`/${getPostSlug(post)}`}>
                 <div className="layout relative h-full">
-                    <div className="absolute group transition-all lg:bottom-24 bottom-40 flex flex-col items-center lg:items-start gap-8 lg:w-2/3 w-full">
-                        <h2 className="font-serif text-base-100 font-bold italic text-5xl lg:text-6xl mr-10">
-                            Latest adventure...
-                        </h2>
-                        <h2 className="text-5xl lg:self-end lg:text-8xl text-warning font-bold uppercase">
+                    <div className="group absolute bottom-40 flex w-full flex-col items-center gap-8 transition-all lg:bottom-24 lg:w-2/3 lg:items-start">
+                        <h2 className="text-5xl font-bold uppercase text-warning lg:self-end lg:text-8xl">
                             {getPostTitle(post)}
                         </h2>
-                        <p className="text-lg md:text-2xl w-full font-mono italic bg-primary text-base-100 text-center group-hover:bg-warning">
+                        <p className="w-full bg-primary text-center font-mono text-lg italic text-base-100 group-hover:bg-warning md:text-2xl">
                             {">>> " + getPostExcerpt(post) + " <<<"}
                         </p>
                     </div>

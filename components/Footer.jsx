@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Footer = () => {
     return (
-        <footer className="bg-primary py-10">
+        <footer className="bottom-0 bg-primary py-10">
             <div className="layout flex justify-between text-white">
                 <nav>
                     <h5 className="text-lg">Sitemap:</h5>

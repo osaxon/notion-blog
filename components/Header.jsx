@@ -1,18 +1,12 @@
 "use client";
 import Link from "next/link";
-import Donut from "./Icons/Donut";
+import Logo from "./Icons/Logo";
 import { AnimatePresence, motion, useCycle } from "framer-motion";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { FiMenu } from "react-icons/fi";
 import siteConfig from "../site.config";
-import { Fredericka_the_Great } from "@next/font/google";
-
-const fredrickaTheGreat = Fredericka_the_Great({
-    subsets: ["latin"],
-    weight: "400",
-});
 
 const navLinks = siteConfig.navMenu;
 
@@ -82,12 +76,10 @@ export default function Header() {
                             className="flex items-center gap-2 text-4xl font-semibold uppercase leading-[36px] tracking-wider"
                             href="/"
                         >
-                            <motion.div whileHover={{ rotate: 60 }}>
-                                <Donut className="fill-warning stroke-primary" />
+                            <motion.div whileHover={{ scale: 1.1 }}>
+                                <Logo className="fill-warning stroke-primary" />
                             </motion.div>
-                            <span className={fredrickaTheGreat.className}>
-                                {siteConfig.name}
-                            </span>
+                            <span>{siteConfig.name}</span>
                         </Link>
                         <ul className="flex gap-x-4">
                             {navLinks.length > 0 &&
@@ -106,12 +98,12 @@ export default function Header() {
                 </nav>
                 <div className="flex h-16 items-center justify-between px-4 md:hidden">
                     <button onClick={cycleOpen}>
-                        <motion.div whileHover={{ rotate: 60 }}>
-                            <Donut className="fill-warning stroke-primary" />
+                        <motion.div whileHover={{ scale: 1.1 }}>
+                            <Logo className="fill-warning stroke-primary" />
                         </motion.div>
                     </button>
                     <div className="w-full text-center text-4xl">
-                        <span className={fredrickaTheGreat.className}>
+                        <span className="text-3xl font-bold">
                             {siteConfig.name}
                         </span>
                     </div>

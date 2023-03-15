@@ -1,9 +1,9 @@
 const siteConfig = {
     // Site meta
-    title: "WebJenga Travel",
-    description: "A travel blog for inspiration for the adventurous",
-    name: "WebJenga.com",
-    url: "https://www.webjenga.com",
+    title: "OG Travel",
+    description: "A travel blog by Oli Saxon and Giovana De-sortis",
+    name: "ogtravel.blog",
+    url: "https://www.ogtravel.blog",
     type: "website",
     robots: "follow index",
     image: "",
