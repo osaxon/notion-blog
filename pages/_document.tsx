@@ -1,18 +1,20 @@
-import Document, { Head, Html, Main, NextScript } from 'next/document'
+import Document, { Head, Html, Main, NextScript } from "next/document";
+import SEO from "../app/SEO";
 
 class MyDocument extends Document {
-  render() {
-    return (
-      <Html lang="en">
-        <Head>
-        </Head>
-        <body className="bg-black antialiased">
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    )
-  }
+    render() {
+        return (
+            <Html lang="en">
+                <Head>
+                    <SEO title="Gallery page" />
+                </Head>
+                <body className="bg-black antialiased">
+                    <Main />
+                    <NextScript />
+                </body>
+            </Html>
+        );
+    }
 }
 
-export default MyDocument
+export default MyDocument;

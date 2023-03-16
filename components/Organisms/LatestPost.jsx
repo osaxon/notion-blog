@@ -7,18 +7,8 @@ import {
     getPostSlug,
     getPostExcerpt,
 } from "../../lib/helpers";
-// import {
-//     useBlogPostImages,
-//     useBlogPostActions,
-// } from "../../lib/context/blog-post-store";
 
 export default function LatestPost({ post }) {
-    // const images = useBlogPostImages();
-    // const { addImage } = useBlogPostActions();
-    // const thisImage = images.filter(
-    //     (image) => image.url === getPostCoverImage(post)
-    // )[0];
-
     return (
         <section className="relative h-[70vh] w-full">
             <Image
