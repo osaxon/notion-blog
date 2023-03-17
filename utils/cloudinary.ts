@@ -1,6 +1,5 @@
 import cloudinary from 'cloudinary'
 import type { ImageProps } from './types'
-import getBase64ImageUrl from './generateBlurPlaceholder'
 
 
 // @ts-ignore
