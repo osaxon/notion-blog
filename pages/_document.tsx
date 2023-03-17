@@ -4,7 +4,7 @@ import SEO from "../app/SEO";
 class MyDocument extends Document {
     render() {
         return (
-            <Html lang="en">
+            <Html data-theme="lofi" lang="en">
                 <Head>
                     <SEO title="Gallery page" />
                 </Head>

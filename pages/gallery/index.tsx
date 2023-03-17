@@ -1,14 +1,12 @@
-import type { NextPage } from "next";
-import { useQueryClient, useQuery } from "@tanstack/react-query";
 import { extractTags } from "../../utils/extractTags";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import clsx from "clsx";
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Modal from "../../components/Modal";
 import getImages from "../../lib/getImages";
-import type { ImageProps } from "../../utils/types";
 import { useLastViewedPhoto } from "../../utils/useLastViewedPhoto";
 
 const Home = ({ images, tags }) => {
@@ -47,56 +45,65 @@ const Home = ({ images, tags }) => {
                     >
                         Home
                     </Link>
-
-                    {tags.map((t) => (
-                        <Link
-                            key={t}
-                            className="text-white"
-                            href={`/gallery/?loc=${t}`}
-                            shallow
-                        >
-                            {t}
-                        </Link>
-                    ))}
-                    <Link href="/gallery" shallow>
-                        Clear
-                    </Link>
                 </nav>
                 <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
                     {images
-                        .filter((img) =>
-                            loc
-                                ? img.tags.includes(loc)
-                                : img.tags.includes(...tags)
-                        )
-                        .map(({ id, public_id, format }) => (
-                            <Link
-                                key={id}
-                                href={`/gallery/?photoId=${id}`}
-                                as={`/gallery/p/${id}`}
-                                ref={
-                                    id === Number(lastViewedPhoto)
-                                        ? lastViewedPhotoRef
-                                        : null
-                                }
-                                shallow
-                                className="after:content group relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight"
-                            >
-                                <Image
-                                    alt=""
-                                    className="transform rounded-sm brightness-90 transition will-change-auto group-hover:brightness-110"
-                                    style={{
-                                        transform: "translate3d(0, 0, 0)",
-                                    }}
-                                    src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
-                                    width={720}
-                                    height={480}
-                                    sizes="(max-width: 640px) 100vw,
+                        .filter((img) => {
+                            if (!loc) return img;
+                            if (img.tags.includes(loc)) return img;
+                        })
+                        .map(({ id, public_id, format, tags }) => (
+                            <div className="mb-5 flex flex-col" key={id}>
+                                <Link
+                                    key={id}
+                                    href={`/gallery/?photoId=${id}`}
+                                    as={`/gallery/p/${id}`}
+                                    ref={
+                                        id === Number(lastViewedPhoto)
+                                            ? lastViewedPhotoRef
+                                            : null
+                                    }
+                                    shallow
+                                    className="after:content group relative block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight"
+                                >
+                                    <Image
+                                        alt=""
+                                        className="transform rounded-sm brightness-90 transition will-change-auto group-hover:brightness-110"
+                                        style={{
+                                            transform: "translate3d(0, 0, 0)",
+                                        }}
+                                        src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${public_id}.${format}`}
+                                        width={720}
+                                        height={480}
+                                        sizes="(max-width: 640px) 100vw,
                   (max-width: 1280px) 50vw,
                   (max-width: 1536px) 33vw,
                   25vw"
-                                />
-                            </Link>
+                                    />
+                                </Link>
+                                <div className="flex break-before-avoid items-center gap-2">
+                                    {tags &&
+                                        tags.map((t) => (
+                                            <Link
+                                                href={
+                                                    loc !== t
+                                                        ? `/gallery/?loc=${t}`
+                                                        : `/gallery`
+                                                }
+                                                shallow
+                                                className={clsx(
+                                                    "font-mono text-sm italic",
+                                                    loc === t
+                                                        ? "text-warning"
+                                                        : "text-primary-content"
+                                                )}
+                                                key={t}
+                                            >
+                                                #{t}
+                                            </Link>
+                                        ))}
+                                </div>
+                            </div>
                         ))}
                 </div>
             </main>
@@ -116,7 +123,6 @@ export default Home;
 
 export async function getStaticProps() {
     const images = await getImages();
-
     return {
         props: {
             images,
