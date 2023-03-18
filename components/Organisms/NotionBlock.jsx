@@ -127,7 +127,7 @@ const NotionBlock = ({ block }) => {
         case BLOCK_TYPES.paragraph:
             // For a paragraph
             return (
-                <p className="text-justify text-xl">
+                <p className="text-xl">
                     {block[BLOCK_TYPES.paragraph].rich_text[0]?.text?.content}{" "}
                 </p>
             );
