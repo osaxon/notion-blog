@@ -14,11 +14,35 @@ const siteConfig = {
             id: 1,
             title: "Home",
             href: "/",
+            hasChildren: false,
         },
         {
             id: 2,
             title: "Posts",
             href: "/",
+            hasChildren: true,
+            children: [
+                {
+                    id: 21,
+                    title: "Vietnam",
+                    href: "/",
+                },
+                {
+                    id: 22,
+                    title: "Thailand",
+                    href: "/",
+                },
+                {
+                    id: 23,
+                    title: "Cambodia",
+                    href: "/",
+                },
+                {
+                    id: 24,
+                    title: "Laos",
+                    href: "/",
+                },
+            ],
         },
         {
             id: 3,

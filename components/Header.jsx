@@ -5,7 +5,6 @@ import { AnimatePresence, motion, useCycle } from "framer-motion";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { FiMenu } from "react-icons/fi";
 import siteConfig from "../site.config";
 
 const navLinks = siteConfig.navMenu;
@@ -83,16 +82,47 @@ export default function Header() {
                         </Link>
                         <ul className="flex gap-x-4">
                             {navLinks.length > 0 &&
-                                navLinks.map((l) => (
-                                    <li key={l.title}>
-                                        <Link
-                                            className="text-2xl font-semibold uppercase leading-[36px]"
-                                            href={l.href}
-                                        >
-                                            {l.title}
-                                        </Link>
-                                    </li>
-                                ))}
+                                navLinks.map((l) => {
+                                    if (l.hasChildren) {
+                                        return (
+                                            <div
+                                                key={l.id}
+                                                className="dropdown-end dropdown"
+                                            >
+                                                <button
+                                                    tabIndex={0}
+                                                    className="text-2xl font-semibold uppercase leading-[36px]"
+                                                >
+                                                    Places
+                                                </button>
+                                                <ul
+                                                    tabIndex={0}
+                                                    className="dropdown-content menu rounded-box w-52 bg-base-100 p-2"
+                                                >
+                                                    {l.children.map((c) => (
+                                                        <Link
+                                                            key={c.id}
+                                                            href={c.href}
+                                                            className="my-2 text-xl font-semibold uppercase leading-5"
+                                                        >
+                                                            {c.title}
+                                                        </Link>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        );
+                                    }
+                                    return (
+                                        <li key={l.title}>
+                                            <Link
+                                                className="text-2xl font-semibold uppercase leading-[36px]"
+                                                href={l.href}
+                                            >
+                                                {l.title}
+                                            </Link>
+                                        </li>
+                                    );
+                                })}
                         </ul>
                     </div>
                 </nav>
