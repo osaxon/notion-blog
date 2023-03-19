@@ -15,10 +15,11 @@ const siteConfig = {
             title: "Home",
             href: "/",
             hasChildren: false,
+            children: null,
         },
         {
             id: 2,
-            title: "Posts",
+            title: "Places",
             href: "/",
             hasChildren: true,
             children: [
@@ -48,6 +49,8 @@ const siteConfig = {
             id: 3,
             title: "Gallery",
             href: "/gallery",
+            hasChildren: false,
+            children: null,
         },
     ],
 };

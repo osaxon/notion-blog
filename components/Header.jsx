@@ -20,6 +20,7 @@ const itemVariants = {
 
 export default function Header() {
     const [open, cycleOpen] = useCycle(false, true);
+    const [subOpen, cycleSubOpen] = useCycle(false, true);
     const pathname = usePathname();
     const [isHome, setIsHome] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
@@ -138,6 +139,8 @@ export default function Header() {
                         </span>
                     </div>
                 </div>
+
+                {/* Mobile Menu */}
                 <AnimatePresence>
                     {open && (
                         <motion.aside
@@ -160,15 +163,88 @@ export default function Header() {
                                 animate="open"
                                 exit="closed"
                             >
-                                {navLinks.map(({ title, href, id }) => (
-                                    <motion.a
-                                        key={id}
-                                        href={href}
-                                        variants={itemVariants}
-                                    >
-                                        {title}
-                                    </motion.a>
-                                ))}
+                                {navLinks.map(
+                                    ({
+                                        title,
+                                        href,
+                                        id,
+                                        hasChildren,
+                                        children,
+                                    }) => {
+                                        if (hasChildren) {
+                                            return (
+                                                <motion.a
+                                                    onClick={cycleSubOpen}
+                                                    key={id}
+                                                    className="cursor-pointer"
+                                                    variants={itemVariants}
+                                                >
+                                                    {title}
+                                                    <AnimatePresence>
+                                                        {subOpen ? (
+                                                            <motion.div
+                                                                initial={{
+                                                                    height: 0,
+                                                                }}
+                                                                animate={{
+                                                                    height: "calc(33vh)",
+                                                                }}
+                                                                exit={{
+                                                                    height: 0,
+                                                                    transition:
+                                                                        {
+                                                                            delay: 0.2,
+                                                                            duration: 0.2,
+                                                                        },
+                                                                }}
+                                                                transition={{
+                                                                    type: "spring",
+                                                                }}
+                                                            >
+                                                                <motion.div
+                                                                    animate="open"
+                                                                    exit="closed"
+                                                                    initial="closed"
+                                                                    className="flex flex-col items-start gap-4 p-3 text-xl font-bold"
+                                                                >
+                                                                    {children.map(
+                                                                        (c) => (
+                                                                            <motion.a
+                                                                                key={
+                                                                                    c.id
+                                                                                }
+                                                                                href={
+                                                                                    c.href
+                                                                                }
+                                                                                variants={
+                                                                                    itemVariants
+                                                                                }
+                                                                            >
+                                                                                {
+                                                                                    c.title
+                                                                                }
+                                                                            </motion.a>
+                                                                        )
+                                                                    )}
+                                                                </motion.div>
+                                                            </motion.div>
+                                                        ) : null}
+                                                    </AnimatePresence>
+                                                </motion.a>
+                                            );
+                                        }
+
+                                        return (
+                                            <motion.a
+                                                key={id}
+                                                href={href}
+                                                variants={itemVariants}
+                                            >
+                                                {title}
+                                            </motion.a>
+                                        );
+                                    }
+                                )}
                             </motion.div>
                         </motion.aside>
                     )}

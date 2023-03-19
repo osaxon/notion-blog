@@ -3,8 +3,6 @@ import Image from "next/image";
 import ReadTime from "./ReadTime";
 import { format } from "date-fns";
 import { getTags } from "../../lib/helpers";
-import Link from "next/link";
-import clsx from "clsx";
 import TagButton from "../Atoms/TagButton";
 
 function FormattedTime({ dt }) {
