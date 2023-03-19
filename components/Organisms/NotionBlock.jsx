@@ -4,12 +4,6 @@ import Emoji from "../Atoms/Emoji";
 import Image from "next/image";
 import Link from "next/link";
 import Heading from "../Atoms/Heading";
-import {
-    useBlogPostImages,
-    useBlogPostActions,
-    useIsZoomed,
-    useZoomedImageURL,
-} from "../../lib/context/blog-post-store";
 import clsx from "clsx";
 
 const BLOCK_TYPES = {
@@ -26,11 +20,6 @@ const BLOCK_TYPES = {
 };
 
 const NotionBlock = ({ block }) => {
-    const images = useBlogPostImages();
-    const zoomedImageURL = useZoomedImageURL();
-    const isZoomed = useIsZoomed();
-    const { addImage, zoom, toggleZoom, setZoomedImg } = useBlogPostActions();
-
     switch (block.type) {
         case BLOCK_TYPES.h1:
             // For a heading
@@ -68,32 +57,22 @@ const NotionBlock = ({ block }) => {
                     : block[BLOCK_TYPES.image].type === "file"
                     ? block[BLOCK_TYPES.image].file.url
                     : null;
-            let thisImage = images.filter((image) => image.url === imgUrl)[0];
+            const imgCaption = block[BLOCK_TYPES.image].caption;
             return (
-                <figure className="relative flex justify-center py-8">
+                <figure className="relative flex h-auto w-full flex-col items-center justify-center py-8">
                     <Image
-                        alt="Cover image"
-                        width={900}
-                        height={thisImage?.ratio ? thisImage?.ratio * 600 : 600}
-                        onLoadingComplete={(e) => {
-                            addImage({
-                                url: imgUrl,
-                                width: e.naturalWidth,
-                                height: e.naturalHeight,
-                                ratio:
-                                    Math.round(
-                                        (e.naturalHeight / e.naturalWidth) * 100
-                                    ) / 100,
-                                orientation:
-                                    e.naturalWidth > e.naturalHeight
-                                        ? "landscape"
-                                        : "portrait",
-                                zoomed: false,
-                            });
-                        }}
-                        className={clsx("h-auto object-cover")}
                         src={imgUrl}
+                        width={600}
+                        height={600}
+                        alt=""
+                        priority
+                        className="object-cover"
                     />
+                    {imgCaption ? (
+                        <span className="w-full italic">
+                            {imgCaption[0]?.text.content}
+                        </span>
+                    ) : null}
                 </figure>
             );
         case "bulleted_list_item":
