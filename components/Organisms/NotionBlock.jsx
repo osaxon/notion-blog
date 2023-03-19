@@ -106,8 +106,25 @@ const NotionBlock = ({ block }) => {
         case BLOCK_TYPES.paragraph:
             // For a paragraph
             return (
-                <p className="text-xl">
-                    {block[BLOCK_TYPES.paragraph].rich_text[0]?.text?.content}{" "}
+                // <p className="text-xl">
+                //     {block[BLOCK_TYPES.paragraph].rich_text[0]?.text?.content}{" "}
+                // </p>
+                <p>
+                    {block[BLOCK_TYPES.paragraph].rich_text.map((p) => {
+                        if (p.annotations.bold)
+                            return (
+                                <span className="font-bold">
+                                    {p.text.content}
+                                </span>
+                            );
+                        if (p.href)
+                            return (
+                                <Link className="link" href={p.href}>
+                                    {p.text.content}
+                                </Link>
+                            );
+                        return p.text.content;
+                    })}
                 </p>
             );
         case BLOCK_TYPES.callout:
