@@ -19,6 +19,44 @@ const BLOCK_TYPES = {
     column: "column",
 };
 
+const RichText = ({ rich_text, as: Element }) => {
+    if (rich_text.length < 1) return null;
+    const annotationTypes = {
+        bold: "font-bold",
+        underline: "underline",
+        strikethrough: "line-through",
+        italic: "italic",
+    };
+    return (
+        <Element>
+            {rich_text.map((el, i) => {
+                const annotation = Object.keys(el.annotations).filter(
+                    (key) => el.annotations[key] === true
+                );
+                const isLink = el.href;
+                if (annotation.length > 0)
+                    return (
+                        <span
+                            key={i}
+                            className={clsx(annotationTypes[annotation])}
+                        >
+                            {el.text.content}
+                        </span>
+                    );
+
+                if (isLink)
+                    return (
+                        <Link className="link" href={el.href}>
+                            {el.text.content}
+                        </Link>
+                    );
+
+                return el.text.content;
+            })}
+        </Element>
+    );
+};
+
 const NotionBlock = ({ block }) => {
     switch (block.type) {
         case BLOCK_TYPES.h1:
@@ -64,7 +102,7 @@ const NotionBlock = ({ block }) => {
                         src={imgUrl}
                         width={600}
                         height={600}
-                        alt=""
+                        alt={imgCaption ? imgCaption : "Image has no caption"}
                         priority
                         className="object-cover"
                     />
@@ -104,29 +142,13 @@ const NotionBlock = ({ block }) => {
         case BLOCK_TYPES.column:
             return;
         case BLOCK_TYPES.paragraph:
-            // For a paragraph
             return (
-                // <p className="text-xl">
-                //     {block[BLOCK_TYPES.paragraph].rich_text[0]?.text?.content}{" "}
-                // </p>
-                <p>
-                    {block[BLOCK_TYPES.paragraph].rich_text.map((p) => {
-                        if (p.annotations.bold)
-                            return (
-                                <span className="font-bold">
-                                    {p.text.content}
-                                </span>
-                            );
-                        if (p.href)
-                            return (
-                                <Link className="link" href={p.href}>
-                                    {p.text.content}
-                                </Link>
-                            );
-                        return p.text.content;
-                    })}
-                </p>
+                <RichText
+                    as="p"
+                    rich_text={block[BLOCK_TYPES.paragraph].rich_text}
+                />
             );
+
         case BLOCK_TYPES.callout:
             const richText = block[BLOCK_TYPES.callout].rich_text;
             const itemCount = richText.length;
