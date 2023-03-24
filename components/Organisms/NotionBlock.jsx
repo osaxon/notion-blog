@@ -183,16 +183,12 @@ const NotionBlock = async ({ block }) => {
             return (
                 <span
                     className={clsx(
-                        "my-8 flex w-full items-center gap-2 p-2 lg:w-2/3",
+                        "my-8 flex w-full items-center gap-2 rounded-sm p-2 shadow-sm",
                         NOTION_BG_COLOUR[block[BLOCK_TYPES.callout].color]
                     )}
                 >
                     {emoji && <Emoji className="text-xl" symbol={emoji} />}
-                    <RichText
-                        className="text-sm"
-                        rich_text={richText}
-                        as="span"
-                    />
+                    <RichText className="text-sm" rich_text={richText} as="p" />
                 </span>
             );
 
