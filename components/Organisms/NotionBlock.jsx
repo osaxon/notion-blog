@@ -47,7 +47,7 @@ const BLOCK_TYPES = {
     column: "column",
 };
 
-const RichText = ({ rich_text, as: Element }) => {
+const RichText = ({ rich_text, as: Element, ...props }) => {
     if (rich_text.length < 1) return null;
     const annotationTypes = {
         bold: "font-bold",
@@ -56,7 +56,7 @@ const RichText = ({ rich_text, as: Element }) => {
         italic: "italic",
     };
     return (
-        <Element>
+        <Element {...props}>
             {rich_text.map((el, i) => {
                 const annotation = Object.keys(el.annotations).filter(
                     (key) => el.annotations[key] === true
@@ -183,29 +183,16 @@ const NotionBlock = async ({ block }) => {
             return (
                 <span
                     className={clsx(
-                        "mt-8 mb-4 flex items-center gap-2 p-2 text-xl",
+                        "my-8 flex w-full items-center gap-2 p-2 lg:w-2/3",
                         NOTION_BG_COLOUR[block[BLOCK_TYPES.callout].color]
                     )}
                 >
                     {emoji && <Emoji className="text-xl" symbol={emoji} />}
-                    {richText.map((item, index) => {
-                        if (item.href !== null) {
-                            return (
-                                <Link
-                                    className="link hover:italic"
-                                    key={index}
-                                    href={item.href}
-                                >
-                                    {item.plain_text}
-                                </Link>
-                            );
-                        }
-                        return (
-                            <p className="p-3" key={index}>
-                                {item.plain_text}
-                            </p>
-                        );
-                    })}
+                    <RichText
+                        className="text-sm"
+                        rich_text={richText}
+                        as="span"
+                    />
                 </span>
             );
 
