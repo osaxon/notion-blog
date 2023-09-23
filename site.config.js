@@ -19,7 +19,7 @@ const siteConfig = {
         },
         {
             id: 2,
-            title: "Places",
+            title: "Posts",
             href: "/",
             hasChildren: true,
             children: [
@@ -41,6 +41,11 @@ const siteConfig = {
                 {
                     id: 24,
                     title: "Laos",
+                    href: "/",
+                },
+                {
+                    id: 25,
+                    title: "Travel tips",
                     href: "/",
                 },
             ],

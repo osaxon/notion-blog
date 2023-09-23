@@ -94,7 +94,7 @@ export default function Header() {
                                                     tabIndex={0}
                                                     className="text-2xl font-semibold uppercase leading-[36px]"
                                                 >
-                                                    Places
+                                                    Posts
                                                 </button>
                                                 <ul
                                                     tabIndex={0}
